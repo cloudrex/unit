@@ -8,8 +8,8 @@ export {
     Is,
     TestConstraint,
     JsType,
-    Unit as TestUnit,
+    Unit,
     Test,
-    Runner as Unit,
+    Runner,
     Feed
 };

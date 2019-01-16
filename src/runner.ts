@@ -1,5 +1,6 @@
 import colors from "colors";
 import Util from "./util";
+import {IRunnerOpts, DefaultOpts} from "./options";
 
 export interface ITest {
     readonly description: string;
@@ -29,7 +30,15 @@ export type TestConstraint = (...args: any[]) => string | null;
 export type Action = () => void;
 
 export default abstract class Runner {
-    public static async test(): Promise<void> {
+    public static before: Action | null = null;
+    public static after: Action | null = null;
+
+    public static async test(opts?: IRunnerOpts): Promise<void> {
+        const options: IRunnerOpts = {
+            ...DefaultOpts,
+            ...opts
+        };
+
         let successful: number = 0;
         let count: number = 0;
 
@@ -37,15 +46,29 @@ export default abstract class Runner {
             Runner.processUnit(unit);
 
             for await (const test of unit.tests) {
+                if (Runner.before !== null) {
+                    Runner.before();
+                }
+
                 if (await Runner.processTest(test)) {
                     successful++;
+                }
+
+                if (Runner.after !== null) {
+                    Runner.after();
                 }
 
                 count++;
             }
         }
 
+        const succeeded: boolean = successful === count;
+
         console.log(colors.green(`\n  ${successful}/${count} {${Util.percentage(successful, count)}%} passing`));
+
+        if (options.exit) {
+            process.exit(succeeded ? options.successExitCode : options.failureExitCode);
+        }
     }
 
     public static clear(): void {
