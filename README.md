@@ -21,7 +21,7 @@ The use of decorators to define units and tests is preferred and encouraged.
 Let's create a simple test to determine whether 'test' equals 'test'. For this, we'll be importing the `Assert` class.
 
 ```ts
-import {TestUnit, Test, Assert, Unit} from "unit";
+import {Unit, Test, Assert, Runner} from "unit";
 
 @TestUnit()
 abstract class Examples {
@@ -32,7 +32,7 @@ abstract class Examples {
 }
 
 // Run tests
-Unit.test();
+Runner.test();
 ```
 
 Our output should be:

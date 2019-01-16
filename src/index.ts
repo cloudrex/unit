@@ -1,6 +1,6 @@
 import {Is} from "./is";
 import Assert from "./assert";
-import UnitLib, {TestConstraint, JsType} from "./unit";
+import Runner, {TestConstraint, JsType} from "./runner";
 import {Unit, Test, Feed} from "./decorators";
 
 export {
@@ -10,6 +10,6 @@ export {
     JsType,
     Unit as TestUnit,
     Test,
-    UnitLib as Unit,
+    Runner as Unit,
     Feed
 };

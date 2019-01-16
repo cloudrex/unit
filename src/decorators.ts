@@ -1,4 +1,4 @@
-import UnitLib from "./unit";
+import Runner from "./runner";
 
 export function Feed(...args: any[]): any {
     return function (target: any, prop: any) {
@@ -39,7 +39,7 @@ export function Unit(name?: string): any {
             name = target.name;
         }
 
-        UnitLib.createUnit(name as string, target);
+        Runner.createUnit(name as string, target);
 
         // Find tests
         for (const prop of Object.getOwnPropertyNames(target.prototype)) {
@@ -49,7 +49,7 @@ export function Unit(name?: string): any {
                 continue;
             }
             else if (typeof method.$$unit_test === "string") {
-                UnitLib.createTest(method.$$unit_test, name as string, method);
+                Runner.createTest(method.$$unit_test, name as string, method);
             }
         }
     }

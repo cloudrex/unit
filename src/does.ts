@@ -1,4 +1,4 @@
-import {TestConstraint} from "./unit";
+import {TestConstraint} from "./runner";
 
 export default abstract class Does {
     public static startWith(str: string): TestConstraint {

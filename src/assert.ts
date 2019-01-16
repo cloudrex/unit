@@ -1,5 +1,5 @@
 import colors from "colors";
-import {TestConstraint, Action} from "./unit";
+import {TestConstraint, Action} from "./runner";
 
 export default abstract class Assert {
     public static that(input: any, ...constraints: TestConstraint[]): void {

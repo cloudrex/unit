@@ -1,4 +1,4 @@
-import {TestConstraint, JsType} from "./unit";
+import {TestConstraint, JsType} from "./runner";
 import Util from "./util";
 
 export abstract class Is {

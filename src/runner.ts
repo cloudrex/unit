@@ -28,16 +28,16 @@ export type TestConstraint = (...args: any[]) => string | null;
 
 export type Action = () => void;
 
-export default abstract class UnitLib {
+export default abstract class Runner {
     public static async test(): Promise<void> {
         let successful: number = 0;
         let count: number = 0;
 
-        for await (const [name, unit] of UnitLib.units) {
-            UnitLib.processUnit(unit);
+        for await (const [name, unit] of Runner.units) {
+            Runner.processUnit(unit);
 
             for await (const test of unit.tests) {
-                if (await UnitLib.processTest(test)) {
+                if (await Runner.processTest(test)) {
                     successful++;
                 }
 
@@ -49,12 +49,12 @@ export default abstract class UnitLib {
     }
 
     public static clear(): void {
-        UnitLib.units.clear();
+        Runner.units.clear();
     }
 
     public static createTest(description: string, unitName: string, instance: any): void {
-        if (UnitLib.units.has(unitName)) {
-            const unit: IUnit = UnitLib.units.get(unitName) as IUnit;
+        if (Runner.units.has(unitName)) {
+            const unit: IUnit = Runner.units.get(unitName) as IUnit;
 
             unit.tests.push({
                 description,
@@ -69,7 +69,7 @@ export default abstract class UnitLib {
     }
 
     public static createUnit<T extends object = any>(name: string, instance: T): void {
-        UnitLib.units.set(name, {
+        Runner.units.set(name, {
             instance,
             name,
             tests: []
@@ -80,6 +80,13 @@ export default abstract class UnitLib {
 
     protected static processUnit(unit: IUnit): void {
         console.log(`  [${unit.name}]`);
+
+        if (unit.tests.length === 0) {
+            const question: string = colors.yellow("?");
+            const desc: string = colors.gray("No tests defined");
+
+            console.log(colors.yellow(`    ${question} ${desc}`));
+        }
     }
 
     protected static async invokeTest(method: any, args: any[]): Promise<Error | null> {
@@ -116,7 +123,7 @@ export default abstract class UnitLib {
 
         // Feed all provided in-line data
         for await (const args of testArgs) {
-            const error: Error | null = await UnitLib.invokeTest(test.instance, args);
+            const error: Error | null = await Runner.invokeTest(test.instance, args);
 
             if (error !== null) {
                 errors.push(error);
