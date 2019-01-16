@@ -1,4 +1,4 @@
-### Unit
+### 🧪 Unit
 
 The unit testing framework for perfectionists.
 
