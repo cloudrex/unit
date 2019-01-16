@@ -1,6 +1,6 @@
 ### 🧪 Unit
 
-The unit testing framework for perfectionists.
+The JavaScript unit testing framework for perfectionists.
 
 ### Installation
 
