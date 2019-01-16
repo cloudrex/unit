@@ -1,0 +1,21 @@
+{
+    "name": "unit",
+    "version": "1.0.0",
+    "description": "The unit testing framework for perfectionists",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "npm run build && node dist/test/runner.js",
+        "build": "tsc"
+    },
+    "keywords": [
+        "testing"
+    ],
+    "author": "Atlas <cloudrex@outlook.com>",
+    "license": "MIT",
+    "files": [
+        "dist"
+    ],
+    "dependencies": {
+        "colors": "^1.3.3"
+    }
+}
