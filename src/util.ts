@@ -9,7 +9,11 @@ export default abstract class Util {
     }
 
     public static percentage(amount: number, max: number): number {
-        // Prevent NaN from division by zero
+        if (amount < 0 || max < 0) {
+            throw new Error("Expecting parameters to be neutral or positive numbers");
+        }
+
+        // Prevent overflows by dividing by zero
         if (amount === 0 && max === 0) {
             return 100;
         }
