@@ -17,6 +17,6 @@ export default abstract class Util {
             return 0;
         }
 
-        return Math.round(amount / max) * 100;
+        return Math.round(amount / max * 100);
     }
 }
