@@ -1,7 +1,7 @@
 {
     "name": "unit",
     "version": "1.0.1",
-    "description": "The unit testing framework for perfectionists",
+    "description": "The JavaScript unit testing framework for perfectionists",
     "main": "dist/index.js",
     "scripts": {
         "test": "npm run build && node dist/test/runner.js",
