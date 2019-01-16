@@ -12,7 +12,7 @@ $ npm install --save-dev unit
 
 ### Syntax
 
-Unit's syntax is designed to be elegant, flexible and simple. It's syntax is heavily inspired by the C# unit testing framework [XUnit](https://xunit.github.io/) among others.
+Unit's syntax is designed to be elegant, flexible and simple. It is heavily inspired by the C# unit testing framework [XUnit](https://xunit.github.io/) among others.
 
 The use of decorators to define units and tests is preferred and encouraged.
 
