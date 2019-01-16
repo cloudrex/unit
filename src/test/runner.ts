@@ -1,6 +1,8 @@
-import Unit from "../unit";
+import UnitLib from "../unit";
 
 // Import tests
 import "./assert.test";
+import "./is.test";
+import "./does.test";
 
-Unit.test();
+UnitLib.test();

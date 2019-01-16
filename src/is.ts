@@ -2,6 +2,56 @@ import {TestConstraint, JsType} from "./unit";
 import Util from "./util";
 
 export abstract class Is {
+    public static greaterThan(num: number): TestConstraint {
+        return (input: any) => {
+            if (input > num) {
+                return null;
+            }
+
+            return `Expected '${input}' to be greater than '${num}'`;
+        };
+    }
+
+    public static lessThan(num: number): TestConstraint {
+        return (input: any) => {
+            if (input < num) {
+                return null;
+            }
+
+            return `Expected '${input}' to be greater than '${num}'`;
+        };
+    }
+
+    public static get negative(): TestConstraint {
+        return (input: any) => {
+            if (input < 0) {
+                return null;
+            }
+
+            return `Expected '${input}' to be negative`;
+        };
+    }
+
+    public static get positive(): TestConstraint {
+        return (input: any) => {
+            if (input > 0) {
+                return null;
+            }
+
+            return `Expected '${input}' to be positive`;
+        };
+    }
+
+    public static get neutral(): TestConstraint {
+        return (input: any) => {
+            if (input === 0) {
+                return null;
+            }
+
+            return `Expected '${input}' to be neutral`;
+        };
+    }
+
     public static get null(): TestConstraint {
         return (input: any) => {
             if (input === null) {
@@ -23,7 +73,7 @@ export abstract class Is {
     }
 
     public static inRange(from: number, to: number): TestConstraint {
-        return (input: number) => {
+        return (input: any) => {
             if (typeof input !== "number") {
                 return `Expected '${input}' to be a number`;
             }
@@ -54,6 +104,16 @@ export abstract class Is {
             }
 
             return `Expected '${input}' to be of type '${type}' but got '${inputType}'`;
+        };
+    }
+
+    public static get NaN(): TestConstraint {
+        return (input: any) => {
+            if (isNaN(input)) {
+                return null;
+            }
+
+            return `Expected '${input}' to be NaN`;
         };
     }
 }

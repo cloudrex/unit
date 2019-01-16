@@ -3,7 +3,8 @@ import Util from "./util";
 
 export interface ITest {
     readonly description: string;
-    readonly invoke: () => void;
+    readonly instance: (...args: any[]) => void;
+    readonly args: Array<any[]>;
 }
 
 export interface IUnit<T = any> {
@@ -27,16 +28,16 @@ export type TestConstraint = (...args: any[]) => string | null;
 
 export type Action = () => void;
 
-export default abstract class Unit {
+export default abstract class UnitLib {
     public static async test(): Promise<void> {
         let successful: number = 0;
         let count: number = 0;
 
-        for (const [name, unit] of Unit.units) {
-            Unit.processUnit(unit);
+        for await (const [name, unit] of UnitLib.units) {
+            UnitLib.processUnit(unit);
 
-            for (const test of unit.tests) {
-                if (await Unit.processTest(test)) {
+            for await (const test of unit.tests) {
+                if (await UnitLib.processTest(test)) {
                     successful++;
                 }
 
@@ -48,16 +49,17 @@ export default abstract class Unit {
     }
 
     public static clear(): void {
-        Unit.units.clear();
+        UnitLib.units.clear();
     }
 
     public static createTest(description: string, unitName: string, instance: any): void {
-        if (Unit.units.has(unitName)) {
-            const unit: IUnit = Unit.units.get(unitName) as IUnit;
+        if (UnitLib.units.has(unitName)) {
+            const unit: IUnit = UnitLib.units.get(unitName) as IUnit;
 
             unit.tests.push({
                 description,
-                invoke: instance
+                instance,
+                args: instance.$$unit_feed || []
             });
 
             return;
@@ -67,7 +69,7 @@ export default abstract class Unit {
     }
 
     public static createUnit<T extends object = any>(name: string, instance: T): void {
-        Unit.units.set(name, {
+        UnitLib.units.set(name, {
             instance,
             name,
             tests: []
@@ -80,12 +82,11 @@ export default abstract class Unit {
         console.log(`  [${unit.name}]`);
     }
 
-    // TODO: Use depth
-    protected static async processTest(test: ITest, depth: number = 0): Promise<boolean> {
+    protected static async invokeTest(method: any, args: any[]): Promise<Error | null> {
         let resultError: Error | null = null;
 
         try {
-            const result: any = test.invoke();
+            const result: any = method(...args);
 
             if (result instanceof Promise) {
                 result.catch((error: Error) => {
@@ -99,18 +100,44 @@ export default abstract class Unit {
             resultError = error;
         }
 
+        return resultError;
+    }
+
+    protected static async processTest(test: ITest): Promise<boolean> {
+        // TODO: Inner array may still be referenced
+        let testArgs: Array<any[]> = [...test.args];
+
+        // Always run test at least once
+        if (testArgs.length === 0) {
+            testArgs = [[undefined]];
+        }
+
+        const errors: Error[] = [];
+
+        // Feed all provided in-line data
+        for await (const args of testArgs) {
+            const error: Error | null = await UnitLib.invokeTest(test.instance, args);
+
+            if (error !== null) {
+                errors.push(error);
+            }
+        }
+
         const desc: string = colors.gray(test.description);
         const check: string = colors.green("√");
         const fail: string = colors.red("X");
 
-        if (resultError === null) {
+        if (errors.length === 0) {
             console.log(`    ${check} ${desc}`);
         }
         else {
             console.log(`    ${fail} ${desc}`);
-            console.log(resultError.message);
+
+            for (const error of errors) {
+                console.log(error.message);
+            }
         }
 
-        return resultError === null;
+        return errors.length === 0;
     }
 }

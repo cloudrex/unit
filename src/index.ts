@@ -1,14 +1,15 @@
 import {Is} from "./is";
 import Assert from "./assert";
-import Unit, {TestConstraint, JsType} from "./unit";
-import {TestUnit, Test} from "./decorators";
+import UnitLib, {TestConstraint, JsType} from "./unit";
+import {Unit, Test, Feed} from "./decorators";
 
 export {
     Assert,
     Is,
     TestConstraint,
     JsType,
-    TestUnit,
+    Unit as TestUnit,
     Test,
-    Unit
+    UnitLib as Unit,
+    Feed
 };

@@ -1,4 +1,18 @@
-import Unit from "./unit";
+import UnitLib from "./unit";
+
+export function Feed(...args: any[]): any {
+    return function (target: any, prop: any) {
+        const method: any = target[prop];
+
+        DecoratorUtil.ensureFunc(method);
+
+        if (method.$$unit_feed === undefined || !Array.isArray(method.$$unit_feed)) {
+            method.$$unit_feed = [];
+        }
+
+        method.$$unit_feed.push(args);
+    };
+}
 
 export function Test(description?: string): any {
     return function (target: any, prop: any) {
@@ -12,11 +26,11 @@ export function Test(description?: string): any {
         }
 
         // Mark function as a test
-        method.$$test = description;
+        method.$$unit_test = description;
     }
 }
 
-export function TestUnit(name?: string): any {
+export function Unit(name?: string): any {
     return function (target: any) {
         // TODO: Required?
         // DecoratorUtils.ensureObj(target);
@@ -25,7 +39,7 @@ export function TestUnit(name?: string): any {
             name = target.name;
         }
 
-        Unit.createUnit(name as string, target);
+        UnitLib.createUnit(name as string, target);
 
         // Find tests
         for (const prop of Object.getOwnPropertyNames(target.prototype)) {
@@ -34,8 +48,8 @@ export function TestUnit(name?: string): any {
             if (typeof method !== "function") {
                 continue;
             }
-            else if (typeof method.$$test === "string") {
-                Unit.createTest(method.$$test, name as string, method);
+            else if (typeof method.$$unit_test === "string") {
+                UnitLib.createTest(method.$$unit_test, name as string, method);
             }
         }
     }
