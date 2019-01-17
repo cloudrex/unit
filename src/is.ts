@@ -117,6 +117,26 @@ export abstract class Is {
         };
     }
 
+    public static get odd(): Constraint {
+        return (input: any) => {
+            if (typeof input == "number" && input % 2 === 1) {
+                return null;
+            }
+
+            return `Expected '${input} to be odd`;
+        }
+    }
+
+    public static get even(): Constraint {
+        return (input: any) => {
+            if (typeof input == "number" && input % 2 === 0) {
+                return null;
+            }
+
+            return `Expected '${input} to be even`;
+        }
+    }
+
     public static instanceOf(instance: any): Constraint {
         return (input: any) => {
             if (input instanceof instance) {
