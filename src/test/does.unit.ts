@@ -26,4 +26,17 @@ default class {
     public match(input: string, pattern: RegExp): void {
         Assert.that(input, Does.match(pattern));
     }
+
+    @Test("should assert whether has property")
+    @Feed({
+        name: "john"
+    }, "name")
+    @Feed({
+        name: "doe",
+        age: 21
+    }, "age")
+    @Feed([], "length")
+    public haveProperty(obj: object, name: string): void {
+        Assert.that(obj, Does.haveProperty(name));
+    }
 }

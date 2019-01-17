@@ -40,4 +40,14 @@ export default abstract class Does {
             return `Expected '${input}' to contain '${item}'`;
         };
     }
+
+    public static haveProperty(name: string): Constraint {
+        return (input: any) => {
+            if (name in input) {
+                return null;
+            }
+
+            return `Expected '${input}' to have property '${name}'`;
+        };
+    }
 }
