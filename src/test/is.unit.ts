@@ -3,7 +3,7 @@ import Assert from "../assert";
 import {Is} from "../is";
 
 @Unit("Is")
-abstract class IsTests {
+default class {
     @Test("should assert whether is empty")
     public isEmpty(): void {
         Assert.that("", Is.empty);

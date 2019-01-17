@@ -3,7 +3,7 @@ import {Assert} from "..";
 import Does from "../does";
 
 @Unit("Does")
-abstract class DoesTests {
+default class {
     @Test("should assert whether ends with")
     @Feed("john doe", "doe")
     @Feed("john doe", "john doe")

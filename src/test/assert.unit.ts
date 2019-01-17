@@ -2,7 +2,7 @@ import {Unit, Test, Feed} from "../decorators";
 import Assert from "../assert";
 
 @Unit("Assert")
-abstract class AssertTests {
+default class {
     @Test("should assert")
     public that(): void {
         Assert.that(null, () => {

@@ -12,9 +12,15 @@ export default abstract class Assert {
         }
     }
 
-    public static equals(entity1: any, entity2: any): void {
+    public static equal(entity1: any, entity2: any): void {
         if (entity1 !== entity2) {
             Assert.complain(`Expected '${entity1}' to equal '${entity2}'`);
+        }
+    }
+
+    public static notEqual(entity1: any, entity2: any): void {
+        if (entity1 === entity2) {
+            Assert.complain(`Expected '${entity1}' to not equal '${entity2}'`);
         }
     }
 
