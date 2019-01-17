@@ -63,7 +63,7 @@ Runner.test();
 Our output should be:
 
 ```bash
-  [Examples]
+  [My Unit]
     √ 'test' should equal 'test'
 
   1/1 {100%} passing
