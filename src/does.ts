@@ -1,7 +1,7 @@
-import {TestConstraint} from "./runner";
+import {Constraint} from "./runner";
 
 export default abstract class Does {
-    public static startWith(str: string): TestConstraint {
+    public static startWith(str: string): Constraint {
         return (input: any) => {
             if (typeof input === "string" && input.startsWith(str)) {
                 return null;
@@ -11,7 +11,7 @@ export default abstract class Does {
         };
     }
 
-    public static endWith(str: string): TestConstraint {
+    public static endWith(str: string): Constraint {
         return (input: any) => {
             if (typeof input === "string" && input.endsWith(str)) {
                 return null;
@@ -21,7 +21,7 @@ export default abstract class Does {
         };
     }
 
-    public static match(pattern: RegExp): TestConstraint {
+    public static match(pattern: RegExp): Constraint {
         return (input: any) => {
             if (typeof input === "string" && pattern.test(input)) {
                 return null;
@@ -31,7 +31,7 @@ export default abstract class Does {
         };
     }
 
-    public static contain(item: any): TestConstraint {
+    public static contain(item: any): Constraint {
         return (input: any) => {
             if (Array.isArray(input) && input.includes(item)) {
                 return null;

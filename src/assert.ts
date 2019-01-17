@@ -1,8 +1,8 @@
 import colors from "colors";
-import {TestConstraint, Action} from "./runner";
+import {Constraint, Action} from "./runner";
 
 export default abstract class Assert {
-    public static that(input: any, ...constraints: TestConstraint[]): void {
+    public static that(input: any, ...constraints: Constraint[]): void {
         for (const constraint of constraints) {
             const result: string | null = constraint(input);
 

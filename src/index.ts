@@ -1,12 +1,12 @@
 import {Is} from "./is";
 import Assert from "./assert";
-import Runner, {TestConstraint, JsType} from "./runner";
+import Runner, {Constraint, JsType} from "./runner";
 import {Unit, Test, Feed} from "./decorators";
 
 export {
     Assert,
     Is,
-    TestConstraint,
+    Constraint,
     JsType,
     Unit,
     Test,

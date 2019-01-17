@@ -1,4 +1,4 @@
-import {TestConstraint as Constraint, JsType} from "./runner";
+import {Constraint, JsType} from "./runner";
 import Util from "./util";
 
 export abstract class Is {
@@ -134,6 +134,16 @@ export abstract class Is {
             }
 
             return `Expected '${input}' to be an instance of '${instance}'`;
+        };
+    }
+
+    public static get array(): Constraint {
+        return (input: any) => {
+            if (Array.isArray(input)) {
+                return null;
+            }
+
+            return `Expected '${input}' to be an array`;
         };
     }
 }

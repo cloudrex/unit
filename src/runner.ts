@@ -25,7 +25,7 @@ export enum JsType {
     Boolean = "boolean"
 }
 
-export type TestConstraint = (...args: any[]) => string | null;
+export type Constraint = (...args: any[]) => string | null;
 
 export type Action = () => void;
 
