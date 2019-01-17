@@ -119,21 +119,21 @@ export abstract class Is {
 
     public static get odd(): Constraint {
         return (input: any) => {
-            if (typeof input == "number" && input % 2 === 1) {
+            if (typeof input === "number" && input % 2 === 1) {
                 return null;
             }
 
-            return `Expected '${input} to be odd`;
+            return `Expected '${input} to be an odd number`;
         }
     }
 
     public static get even(): Constraint {
         return (input: any) => {
-            if (typeof input == "number" && input % 2 === 0) {
+            if (typeof input === "number" && input % 2 === 0) {
                 return null;
             }
 
-            return `Expected '${input} to be even`;
+            return `Expected '${input} to be an even number`;
         }
     }
 
