@@ -95,6 +95,16 @@ export abstract class Is {
         };
     }
 
+    public static get emptyString(): TestConstraint {
+        return (input: any) => {
+            if (input === "") {
+                return null;
+            }
+
+            return `Expected '${input}' to be an empty string`;
+        };
+    }
+
     public static type(type: JsType): TestConstraint {
         return (input: any) => {
             const inputType: JsType = typeof input as JsType;

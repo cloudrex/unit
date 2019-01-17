@@ -1,8 +1,8 @@
 import Runner from "../runner";
 
 // Import tests
-import "./assert.test";
-import "./is.test";
-import "./does.test";
+import "./assert.unit";
+import "./is.unit";
+import "./does.unit";
 
 Runner.test();
