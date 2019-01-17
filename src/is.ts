@@ -1,8 +1,8 @@
-import {TestConstraint, JsType} from "./runner";
+import {TestConstraint as Constraint, JsType} from "./runner";
 import Util from "./util";
 
 export abstract class Is {
-    public static greaterThan(num: number): TestConstraint {
+    public static greaterThan(num: number): Constraint {
         return (input: any) => {
             if (input > num) {
                 return null;
@@ -12,7 +12,7 @@ export abstract class Is {
         };
     }
 
-    public static lessThan(num: number): TestConstraint {
+    public static lessThan(num: number): Constraint {
         return (input: any) => {
             if (input < num) {
                 return null;
@@ -22,7 +22,7 @@ export abstract class Is {
         };
     }
 
-    public static get negative(): TestConstraint {
+    public static get negative(): Constraint {
         return (input: any) => {
             if (input < 0) {
                 return null;
@@ -32,7 +32,7 @@ export abstract class Is {
         };
     }
 
-    public static get positive(): TestConstraint {
+    public static get positive(): Constraint {
         return (input: any) => {
             if (input > 0) {
                 return null;
@@ -42,7 +42,7 @@ export abstract class Is {
         };
     }
 
-    public static get neutral(): TestConstraint {
+    public static get neutral(): Constraint {
         return (input: any) => {
             if (input === 0) {
                 return null;
@@ -52,7 +52,7 @@ export abstract class Is {
         };
     }
 
-    public static get null(): TestConstraint {
+    public static get null(): Constraint {
         return (input: any) => {
             if (input === null) {
                 return null;
@@ -62,7 +62,7 @@ export abstract class Is {
         };
     }
 
-    public static get undefined(): TestConstraint {
+    public static get undefined(): Constraint {
         return (input: any) => {
             if (input === undefined) {
                 return null;
@@ -72,7 +72,7 @@ export abstract class Is {
         };
     }
 
-    public static inRange(from: number, to: number): TestConstraint {
+    public static inRange(from: number, to: number): Constraint {
         return (input: any) => {
             if (typeof input !== "number") {
                 return `Expected '${input}' to be a number`;
@@ -85,7 +85,7 @@ export abstract class Is {
         };
     }
 
-    public static get empty(): TestConstraint {
+    public static get empty(): Constraint {
         return (input: any) => {
             if (Util.isEmpty(input)) {
                 return null;
@@ -95,7 +95,7 @@ export abstract class Is {
         };
     }
 
-    public static get emptyString(): TestConstraint {
+    public static get emptyString(): Constraint {
         return (input: any) => {
             if (input === "") {
                 return null;
@@ -105,7 +105,7 @@ export abstract class Is {
         };
     }
 
-    public static type(type: JsType): TestConstraint {
+    public static type(type: JsType): Constraint {
         return (input: any) => {
             const inputType: JsType = typeof input as JsType;
 
@@ -117,13 +117,23 @@ export abstract class Is {
         };
     }
 
-    public static get NaN(): TestConstraint {
+    public static get NaN(): Constraint {
         return (input: any) => {
             if (isNaN(input)) {
                 return null;
             }
 
             return `Expected '${input}' to be NaN`;
+        };
+    }
+
+    public static instanceOf(instance: any): Constraint {
+        return (input: any) => {
+            if (input instanceof instance) {
+                return null;
+            }
+
+            return `Expected '${input}' to be an instance of '${instance}'`;
         };
     }
 }
