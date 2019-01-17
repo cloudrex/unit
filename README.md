@@ -32,7 +32,7 @@ default class { // Anonymous class declaration
 }
 ```
 
-3. Suffix unit files with ".unit" (ex. "utils.unit.ts" or "fun.unit.js")
+3. Suffix unit files with ".unit" (ex. `utils.unit.ts` or `fun.unit.js`)
 
 4. Import all units and run tests from a single file
 
