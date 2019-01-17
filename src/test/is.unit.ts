@@ -6,56 +6,80 @@ import {JsType} from "../runner";
 @Unit("Is")
 default class {
     @Test("should assert whether is empty")
-    public empty(): void {
-        Assert.that("", Is.empty);
+    @Feed("")
+    @Feed(null)
+    @Feed(undefined)
+    @Feed([])
+    @Feed({})
+    public empty(input: any): void {
+        Assert.that(input, Is.empty);
+    }
+
+    @Test("should assert whether is empty string")
+    @Feed("")
+    public emptyString(input: string): void {
+        Assert.that(input, Is.emptyString);
     }
 
     @Test("should assert whether is null")
-    public null(): void {
-        Assert.that(null, Is.null);
+    @Feed(null)
+    public null(input: any): void {
+        Assert.that(input, Is.null);
     }
 
     @Test("should assert whether is undefined")
-    public undefined(): void {
-        Assert.that(undefined, Is.undefined);
+    @Feed(undefined)
+    public undefined(input: any): void {
+        Assert.that(input, Is.undefined);
     }
 
     @Test("should assert whether is positive")
-    public positive(): void {
-        Assert.that(1, Is.positive);
+    @Feed(1)
+    public positive(input: number): void {
+        Assert.that(input, Is.positive);
     }
 
     @Test("should assert whether is negative")
-    public negative(): void {
-        Assert.that(-1, Is.negative);
+    @Feed(-1)
+    public negative(input: number): void {
+        Assert.that(input, Is.negative);
     }
 
     @Test("should assert whether is neutral")
-    public neutral(): void {
-        Assert.that(0, Is.neutral);
+    @Feed(0)
+    public neutral(input: number): void {
+        Assert.that(input, Is.neutral);
     }
 
     @Test("should assert whether is greater than")
-    public greaterThan(): void {
-        Assert.that(1, Is.greaterThan(0));
+    @Feed(1, 0)
+    @Feed(-1, -2)
+    @Feed(0, -1)
+    public greaterThan(input: number, greaterThan: number): void {
+        Assert.that(input, Is.greaterThan(greaterThan));
     }
 
     @Test("should assert whether is less than")
-    public lessThan(): void {
-        Assert.that(0, Is.lessThan(1));
+    @Feed(0, 1)
+    @Feed(-2, -1)
+    @Feed(-1, 0)
+    public lessThan(input: number, lessThan: number): void {
+        Assert.that(input, Is.lessThan(lessThan));
     }
 
     @Test("should assert whether is NaN")
-    public NaN(): void {
-        Assert.that(0 / 0, Is.NaN);
+    @Feed(0 / 0)
+    public NaN(input: number): void {
+        Assert.that(input, Is.NaN);
     }
 
     @Test("should assert whether is array")
-    public array(): void {
-        Assert.that([], Is.array);
-        Assert.that([1, 2, 3], Is.array);
-        Assert.that([undefined, null], Is.array);
-        Assert.that([""], Is.array);
+    @Feed([])
+    @Feed([1, 2, 3])
+    @Feed([undefined, null])
+    @Feed([""])
+    public array(input: any[]): void {
+        Assert.that(input, Is.array);
     }
 
     @Test("should assert whether is array of type")
