@@ -5,47 +5,55 @@ import {Is} from "../is";
 @Unit("Is")
 default class {
     @Test("should assert whether is empty")
-    public isEmpty(): void {
+    public empty(): void {
         Assert.that("", Is.empty);
     }
 
     @Test("should assert whether is null")
-    public isNull(): void {
+    public null(): void {
         Assert.that(null, Is.null);
     }
 
     @Test("should assert whether is undefined")
-    public isUndefined(): void {
+    public undefined(): void {
         Assert.that(undefined, Is.undefined);
     }
 
     @Test("should assert whether is positive")
-    public isPositive(): void {
+    public positive(): void {
         Assert.that(1, Is.positive);
     }
 
     @Test("should assert whether is negative")
-    public isNegative(): void {
+    public negative(): void {
         Assert.that(-1, Is.negative);
     }
 
     @Test("should assert whether is neutral")
-    public isNeutral(): void {
+    public neutral(): void {
         Assert.that(0, Is.neutral);
     }
 
     @Test("should assert whether is greater than")
-    public isGreaterThan(): void {
+    public greaterThan(): void {
         Assert.that(1, Is.greaterThan(0));
     }
 
     @Test("should assert whether is less than")
-    public isLessThan(): void {
+    public lessThan(): void {
         Assert.that(0, Is.lessThan(1));
     }
 
     @Test("should assert whether is NaN")
-    public isNaN(): void {
+    public NaN(): void {
         Assert.that(0 / 0, Is.NaN);
+    }
+
+    @Test("should assert whether is array")
+    public array(): void {
+        Assert.that([], Is.array);
+        Assert.that([1, 2, 3], Is.array);
+        Assert.that([undefined, null], Is.array);
+        Assert.that([""], Is.array);
     }
 }
