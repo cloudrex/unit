@@ -1,6 +1,7 @@
-import {Unit, Test} from "../decorators";
+import {Unit, Test, Feed} from "../decorators";
 import Assert from "../assert";
 import {Is} from "../is";
+import {JsType} from "../runner";
 
 @Unit("Is")
 default class {
@@ -55,5 +56,12 @@ default class {
         Assert.that([1, 2, 3], Is.array);
         Assert.that([undefined, null], Is.array);
         Assert.that([""], Is.array);
+    }
+
+    @Test("should assert whether is array of type")
+    @Feed([1, 2, 3], JsType.Number)
+    @Feed(["john", "doe"], JsType.String)
+    public arrayType(input: any[], type: JsType): void {
+        Assert.that(input, Is.arrayOf(type));
     }
 }

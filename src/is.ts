@@ -146,4 +146,26 @@ export abstract class Is {
             return `Expected '${input}' to be an array`;
         };
     }
+
+    public static arrayOf(type: JsType): Constraint {
+        return (input: any) => {
+            if (Array.isArray(input)) {
+                let succeeded: boolean = true;
+
+                for (const item of input) {
+                    if (typeof item !== type) {
+                        succeeded = false;
+
+                        break;
+                    }
+                }
+
+                if (succeeded) {
+                    return null;
+                }
+            }
+
+            return `Expected '${input}' to be an array of type '${type}'`;
+        }
+    };
 }
