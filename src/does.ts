@@ -50,4 +50,14 @@ export default abstract class Does {
             return `Expected '${input}' to have property '${name}'`;
         };
     }
+
+    public static haveLength(length: number): Constraint {
+        return (input: any) => {
+            if (input.length === length) {
+                return null;
+            }
+
+            return `Expected '${input}' to have a length of '${length}'`;
+        };
+    }
 }
