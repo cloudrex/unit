@@ -62,16 +62,6 @@ export abstract class Is {
         };
     }
 
-    public static get undefined(): Constraint {
-        return (input: any) => {
-            if (input === undefined) {
-                return null;
-            }
-
-            return `Expected '${input}' to be undefined`;
-        };
-    }
-
     public static inRange(from: number, to: number): Constraint {
         return (input: any) => {
             if (typeof input !== "number") {
@@ -168,4 +158,36 @@ export abstract class Is {
             return `Expected '${input}' to be an array of type '${type}'`;
         }
     };
+
+    public static get string(): Constraint {
+        return Is.type(JsType.String);
+    }
+
+    public static get object(): Constraint {
+        return Is.type(JsType.Object);
+    }
+
+    public static get boolean(): Constraint {
+        return Is.type(JsType.Boolean);
+    }
+
+    public static get bigInt(): Constraint {
+        return Is.type(JsType.BigInteger);
+    }
+
+    public static get undefined(): Constraint {
+        return Is.type(JsType.Undefined);
+    }
+
+    public static get symbol(): Constraint {
+        return Is.type(JsType.Symbol);
+    }
+
+    public static get function(): Constraint {
+        return Is.type(JsType.Function);
+    }
+
+    public static get number(): Constraint {
+        return Is.type(JsType.Number);
+    }
 }
