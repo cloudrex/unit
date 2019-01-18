@@ -14,11 +14,13 @@ export default class Mock {
     }
 
     protected readonly calls: ICall[];
-    protected readonly impl?: MockImplementation;
+    protected readonly mockStack: MockImplementation[];
+
+    protected impl?: MockImplementation;
 
     public constructor() {
         this.calls = [];
-        this.impl = undefined;
+        this.mockStack = [];
     }
 
     public invoker(...args: any[]): this {
@@ -33,6 +35,22 @@ export default class Mock {
             result,
             time: Date.now()
         });
+
+        return this;
+    }
+
+    public once(impl: MockImplementation): this {
+        if (this.impl !== undefined) {
+            throw new Error("Implementation has been previously locked as 'always'");
+        }
+
+        this.mockStack.push(impl);
+
+        return this;
+    }
+
+    public always(impl?: MockImplementation): this {
+        this.impl = impl;
 
         return this;
     }
