@@ -13,7 +13,8 @@ export default class Mock {
         return result;
     }
 
-    protected readonly calls: ICall[];
+    public readonly calls: ICall[];
+
     protected readonly mockStack: MockImplementation[];
 
     protected impl?: MockImplementation;
