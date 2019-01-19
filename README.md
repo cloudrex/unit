@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcloudrex%2Funit.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcloudrex%2Funit?ref=badge_shield)
+
 ### 🧪 Unit
 
 The JavaScript unit testing framework for perfectionists.
@@ -88,3 +90,7 @@ default class {
 ```
 
 As you can see, this makes the process a whole lot easier. You can, of course, provide as much in-line data as your heart desires.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcloudrex%2Funit.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcloudrex%2Funit?ref=badge_large)
