@@ -60,4 +60,14 @@ export default abstract class Does {
             return `Expected '${input}' to have a length of '${length}'`;
         };
     }
+
+    public static haveSize(size: number): Constraint {
+        return (input: any) => {
+            if (input.size === size) {
+                return null;
+            }
+
+            return `Expected '${input}' to have a size of '${size}'`;
+        };
+    }
 }

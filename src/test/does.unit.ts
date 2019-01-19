@@ -39,4 +39,20 @@ default class {
     public haveProperty(obj: object, name: string): void {
         Assert.that(obj, Does.haveProperty(name));
     }
+
+    @Test("should assert whether has length")
+    @Feed([], 0)
+    @Feed(["john"], 1)
+    @Feed(["john", "doe"], 2)
+    public haveLength(arr: any[], length: number): void {
+        Assert.that(arr, Does.haveLength(length));
+    }
+
+    @Test("should assert whether has size")
+    @Feed([], 0)
+    @Feed(["john"], 1)
+    @Feed(["john", "doe"], 2)
+    public haveSize(arr: any[], size: number): void {
+        Assert.that(arr, Does.haveSize(size));
+    }
 }
