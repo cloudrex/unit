@@ -136,6 +136,20 @@ export abstract class Is {
     }
 
     /**
+     * Assert that input is an empty array.
+     * @return {Constraint}
+     */
+    public static get emptyArray(): Constraint {
+        return (input: any) => {
+            if (Array.isArray(input) && input.length === 0) {
+                return null;
+            }
+
+            return `Expected '${input}' to be an empty array`;
+        };
+    }
+
+    /**
      * Assert that input is of the specified type.
      * @param {JsType} type
      * @return {Constraint}
@@ -212,6 +226,21 @@ export abstract class Is {
             }
 
             return `Expected '${input}' to be an array`;
+        };
+    }
+
+    /**
+     * Assert that input is an array with the specified length.
+     * @param {number} length The amount of elements array must contain.
+     * @return {Constraint}
+     */
+    public static arrayWithLength(length: number): Constraint {
+        return (input: any) => {
+            if (Array.isArray(input) && input.length === length) {
+                return null;
+            }
+
+            return `Expected '${input}' to be an array with length '${length}'`;
         };
     }
 
