@@ -156,8 +156,8 @@ export abstract class Is {
             }
 
             return `Expected '${input}' to be an array of type '${type}'`;
-        }
-    };
+        };
+    }
 
     public static get string(): Constraint {
         return Is.type(JsType.String);
