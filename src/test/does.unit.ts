@@ -1,6 +1,6 @@
 import {Unit, Test, Feed} from "../decorators";
-import {Assert} from "..";
 import Does from "../does";
+import Assert from "../assert";
 
 @Unit("Does")
 default class {
