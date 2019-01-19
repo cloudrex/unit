@@ -168,21 +168,21 @@ export abstract class Is {
 
     public static get odd(): Constraint {
         return (input: any) => {
-            if (typeof input === "number" && input % 2 === 1) {
+            if (typeof input === "number" && !Util.isEven(input)) {
                 return null;
             }
 
-            return `Expected '${input} to be an odd number`;
+            return `Expected '${input}' to be an odd number`;
         }
     }
 
     public static get even(): Constraint {
         return (input: any) => {
-            if (typeof input === "number" && input % 2 === 0) {
+            if (typeof input === "number" && Util.isEven(input)) {
                 return null;
             }
 
-            return `Expected '${input} to be an even number`;
+            return `Expected '${input}' to be an even number`;
         }
     }
 

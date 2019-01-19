@@ -88,4 +88,21 @@ default class {
     public arrayType(input: any[], type: JsType): void {
         Assert.that(input, Is.arrayOf(type));
     }
+
+    @Test("should assert whether is odd")
+    @Feed(1)
+    @Feed(3)
+    @Feed(-1)
+    @Feed(-3)
+    public odd(input: number): void {
+        Assert.that(input, Is.odd);
+    }
+
+    @Test("should assert whether is even")
+    @Feed(0)
+    @Feed(2)
+    @Feed(-2)
+    public even(input: number): void {
+        Assert.that(input, Is.even);
+    }
 }
