@@ -57,7 +57,7 @@ export default abstract class Does {
                 return null;
             }
 
-            return `Expected '${input}' to have a length of '${length}'`;
+            return `Expected '${input}' to have a length of '${length}' but got '${input.length}'`;
         };
     }
 
@@ -67,7 +67,7 @@ export default abstract class Does {
                 return null;
             }
 
-            return `Expected '${input}' to have a size of '${size}'`;
+            return `Expected '${input}' to have a size of '${size}' but got '${input.size}'`;
         };
     }
 }
