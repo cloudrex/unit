@@ -58,11 +58,12 @@ export default abstract class Runner {
             ...opts
         };
 
+        let firstUnit: boolean = true;
         let successful: number = 0;
         let count: number = 0;
 
-        for await (const [name, unit] of Runner.units) {
-            Runner.processUnit(unit);
+        for await (const unit of Runner.units.values()) {
+            Runner.processUnit(unit, firstUnit);
 
             for await (const test of unit.tests) {
                 if (Runner.before !== null) {
@@ -79,6 +80,8 @@ export default abstract class Runner {
 
                 count++;
             }
+
+            firstUnit = false;
         }
 
         const succeeded: boolean = successful === count;
@@ -123,8 +126,8 @@ export default abstract class Runner {
 
     protected static units: Map<string, IUnit> = new Map();
 
-    protected static processUnit(unit: IUnit): void {
-        console.log(`  [${unit.name}]`);
+    protected static processUnit(unit: IUnit, first: boolean = false): void {
+        console.log(`${!first ? "\n" : ""}  [${unit.name}]`);
 
         if (unit.tests.length === 0) {
             const question: string = colors.yellow("?");
