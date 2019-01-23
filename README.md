@@ -69,7 +69,7 @@ Our output should be:
   1/1 {100%} passing
 ```
 
-#### 2. Feeding
+#### 2. Feeding Tests
 
 Instead of writing many assert statements, we can use the clever `@Feed` decorator. It's job is to provide (thus "feed") the test method with in-line data.
 
@@ -88,3 +88,31 @@ default class {
 ```
 
 As you can see, this makes the process a whole lot easier. You can, of course, provide as much in-line data as your heart desires.
+
+#### 3. Mocking
+
+In simple terms, mocking is the process of replacing or modifying existing functionality with custom implementations with the purpose of debugging and/or simplifying certain processes that would otherwise make our tests fragile, and dependent of the environment.
+
+Fortunately, Unit provides elegant mocking utilities built with simplicitly in mind.
+
+**Mocking a return value**
+
+```ts
+import {Mock} from "unit";
+
+let existingFn = (): number => 0;
+```
+
+In this simple example, we would like to mock `existingFn` so that it returns `1` instead of `0`.
+
+We can easily accomplish this functionality using the `returnOnce` helper function:
+
+```ts
+...
+
+existingFn = Mock.fn(existingFn) // Prepare the function to be mocked.
+    .returnOnce(1) // We specify that we want the function to return 1.
+    .invoker; // Finally we replace the function with our mock invoker.
+
+console.log(existingFn()); // 1
+```
