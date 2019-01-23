@@ -95,7 +95,7 @@ In simple terms, mocking is the process of replacing or modifying existing funct
 
 Fortunately, Unit provides elegant mocking utilities built with simplicitly in mind.
 
-**Mocking a return value**
+**Mocking return values**
 
 ```ts
 import {Mock} from "unit";
@@ -103,7 +103,7 @@ import {Mock} from "unit";
 let existingFn = (): number => 0;
 ```
 
-In this simple example, we would like to mock the function `existingFn` so that it returns `1` instead of `0`.
+In this simple example, we would like to mock the function `existingFn` so thats it returns `1` instead of `0` the *next time it is called*.
 
 We can easily accomplish this functionality using the `returnOnce` helper function:
 
@@ -111,8 +111,31 @@ We can easily accomplish this functionality using the `returnOnce` helper functi
 ...
 
 existingFn = Mock.fn(existingFn) // Prepare the function to be mocked.
-    .returnOnce(1) // We specify that we want the function to return 1.
+    .returnOnce(1) // We specify that we want the function to return '1' the next time it is called.
     .invoker; // Finally we replace the function with our mock invoker.
 
 console.log(existingFn()); // 1
+console.log(existingFn()); // 0
+```
+
+Interestingly, the second call to the `existingFn` function returns `0`, which is what we would expect.
+
+**Mocking implementations**
+
+In some cases, we may need to not only mock a function's return value, but it's implementation.
+
+This can be achived using the `once` helper function:
+
+```ts
+let square = (num: number): number => num ** 2;
+
+square = Mock.fn(square)
+    // Implement the target once.
+    .once((num: number): number => num * 2)
+
+    // Assign our invoker.
+    .invoker;
+
+console.log(square(4)); // 16
+console.log(square(4)); // 8
 ```
