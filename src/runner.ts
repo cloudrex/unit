@@ -70,7 +70,7 @@ export default abstract class Runner {
                     Runner.before();
                 }
 
-                if (await Runner.processTest(test)) {
+                if (await Runner.processTest(test, options.shouldPrefix)) {
                     successful++;
                 }
 
