@@ -158,7 +158,7 @@ export default abstract class Runner {
         return resultError;
     }
 
-    protected static async processTest(test: ITest): Promise<boolean> {
+    protected static async processTest(test: ITest, prefix: boolean = false): Promise<boolean> {
         // TODO: Inner array may still be referenced
         let testArgs: Array<any[]> = [...test.args];
 
@@ -181,12 +181,13 @@ export default abstract class Runner {
         const desc: string = colors.gray(test.description);
         const check: string = colors.green("√");
         const fail: string = colors.red("X");
+        const prefixStr: string = prefix ? "should" : "";
 
         if (errors.length === 0) {
-            console.log(`    ${check} ${desc}`);
+            console.log(`    ${prefixStr} ${check} ${desc}`);
         }
         else {
-            console.log(`    ${fail} ${desc}`);
+            console.log(`    ${prefixStr} ${fail} ${desc}`);
 
             for (const error of errors) {
                 console.log(error.message);
