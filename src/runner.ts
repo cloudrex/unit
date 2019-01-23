@@ -64,7 +64,7 @@ export default abstract class Runner {
 
         const succeeded: boolean = successful === count;
 
-        console.log(colors.green(`\n  ${successful}/${count} {${Util.percentage(successful, count)}%} passing`));
+        console.log(colors.green(`\n  ${successful}/${count} {${Util.percentage(successful, count)}%} passing\n`));
 
         if (options.exit) {
             process.exit(succeeded ? options.successExitCode : options.failureExitCode);
