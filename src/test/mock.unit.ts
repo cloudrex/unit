@@ -7,12 +7,12 @@ const emptyFn = (): void => {};
 
 @Unit("Mock")
 default class {
-    @Test("should return a mock instance upon statically creating mock")
+    @Test("return a mock instance upon statically creating mock")
     public mockFn(): void {
         Assert.that(Mock.fn(emptyFn), Is.instanceOf(Mock));
     }
 
-    @Test("should register a single mock implementation")
+    @Test("register a single mock implementation")
     public once(): void {
         const mock: Mock = Mock.fn(emptyFn);
 
@@ -25,7 +25,7 @@ default class {
         Assert.that(mock["singleMockStack"], Is.arrayWithLength(1));
     }
 
-    @Test("should assign the permanent implementation")
+    @Test("assign the permanent implementation")
     public always(): void {
         const mock: Mock = Mock.fn(emptyFn);
 
@@ -38,7 +38,7 @@ default class {
         Assert.that(mock["permanentImpl"], Is.function);
     }
 
-    @Test("should be able to remove permanent implementation")
+    @Test("be able to remove permanent implementation")
     public alwaysRemove(): void {
         const mock: Mock = Mock.fn(emptyFn)
             .always((): void => {})
@@ -47,7 +47,7 @@ default class {
         Assert.that(mock["permanentImpl"], Is.undefined);
     }
 
-    @Test("should invoke a mocked function")
+    @Test("invoke a mocked function")
     public invoke(): void {
         let fn = (): number => 0;
 
@@ -57,7 +57,7 @@ default class {
         Assert.equal(fn(), 0);
     }
 
-    @Test("should mock a function once with various implementations")
+    @Test("mock a function once with various implementations")
     public onceMultiple(): void {
         let fn = (): number => 1;
 
@@ -71,7 +71,7 @@ default class {
         Assert.equal(fn(), 1);
     }
 
-    @Test("should mock a function result once")
+    @Test("mock a function result once")
     public onceResult(): void {
         let fn = (): number => 1;
 

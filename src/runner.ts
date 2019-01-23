@@ -181,13 +181,13 @@ export default abstract class Runner {
         const desc: string = colors.gray(test.description);
         const check: string = colors.green("√");
         const fail: string = colors.red("X");
-        const prefixStr: string = prefix ? "should" : "";
+        const prefixStr: string = prefix ? colors.gray("should") : "";
 
         if (errors.length === 0) {
-            console.log(`    ${prefixStr} ${check} ${desc}`);
+            console.log(`    ${check} ${prefixStr} ${desc}`);
         }
         else {
-            console.log(`    ${prefixStr} ${fail} ${desc}`);
+            console.log(`    ${fail} ${prefixStr} ${desc}`);
 
             for (const error of errors) {
                 console.log(error.message);
