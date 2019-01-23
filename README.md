@@ -17,7 +17,7 @@ Unit's syntax is designed to be elegant, flexible and simple. It is heavily insp
 The use of decorators to define units and tests is preferred and encouraged.
 
 
-### Suggested Practices
+### Suggested practices
 
 Below are some suggested practices to follow when using Unit for unit testing.
 
