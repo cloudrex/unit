@@ -69,7 +69,7 @@ Our output should be:
   1/1 {100%} passing
 ```
 
-#### 2. Feeding Tests with in-line data
+#### 2. Feeding tests with in-line data
 
 Instead of writing many assert statements, we can use the clever `@Feed` decorator. It's job is to provide (thus "feed") the test method with in-line data.
 
