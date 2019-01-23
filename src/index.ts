@@ -3,6 +3,7 @@ import Assert from "./assert";
 import Runner, {Constraint, JsType} from "./runner";
 import {Unit, Test, Feed} from "./decorators";
 import Does from "./does";
+import Mock from "./mock";
 
 export {
     Assert,
@@ -13,5 +14,6 @@ export {
     Test,
     Runner,
     Feed,
-    Does
+    Does,
+    Mock
 };
