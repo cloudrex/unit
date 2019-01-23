@@ -40,17 +40,6 @@ default class { // Anonymous class declaration
 
 6. Do not export unit classes (There's no need!)
 
-### Why use Unit?
-
-What makes Unit different than the other various JavaScript testing frameworks, and why should I consider using it?
-
-* Simple, elegant decorator-based syntax.
-* Built-in mocking utilities.
-* Broad range of useful assertion utilities.
-* Chainable methods with simple names; Less writing, more doing.
-* Tested codebase.
-* Full TypeScript support (It's written in it!).
-
 ### Examples
 
 #### 1. Your First Unit
@@ -150,3 +139,14 @@ square = Mock.fn(square)
 console.log(square(4)); // 16
 console.log(square(4)); // 8
 ```
+
+### Why use Unit?
+
+What makes Unit different than the other various JavaScript testing frameworks, and why should I consider using it?
+
+* Simple, elegant decorator-based syntax.
+* Built-in mocking utilities.
+* Broad range of useful assertion utilities.
+* Chainable methods with simple names; Less writing, more doing.
+* Tested codebase.
+* Full TypeScript support (It's written in it!).
