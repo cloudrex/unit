@@ -144,7 +144,7 @@ console.log(square(4)); // 8
 
 What makes Unit different from the other various JavaScript testing frameworks, and why should I consider using it?
 
-* Simple, elegant decorator-based syntax.
+* Simple, elegant decorator-based syntax which make writing tests a breeze.
 * Built-in mocking utilities.
 * Broad range of useful assertion utilities.
 * Chainable methods with simple names; Less writing, more doing.
