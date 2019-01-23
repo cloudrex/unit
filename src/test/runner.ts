@@ -6,4 +6,6 @@ import "./is.unit";
 import "./does.unit";
 import "./mock.unit";
 
-Runner.test();
+Runner.test({
+    shouldPrefix: true
+});

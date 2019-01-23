@@ -50,9 +50,9 @@ export default abstract class Runner {
 
     /**
      * Run all registered tests.
-     * @param {IRunnerOpts} opts
+     * @param {Partial<IRunnerOpts>} opts
      */
-    public static async test(opts?: IRunnerOpts): Promise<void> {
+    public static async test(opts?: Partial<IRunnerOpts>): Promise<void> {
         const options: IRunnerOpts = {
             ...DefaultOpts,
             ...opts
