@@ -1,3 +1,5 @@
+import {Action} from "./runner";
+
 /**
  * Represents a mock function implementation.
  */
@@ -20,12 +22,23 @@ export interface ICall {
 export default class Mock {
     /**
      * @param {*} target The target function to mock.
-     * @return {Mock}
+     * @return {Mock} A new mock class instance.
      */
     public static fn(target: any): Mock {
         return new Mock(target);
     }
 
+    /**
+     * An empty function.
+     * @return {Action}
+     */
+    public static get emptyFn(): Action {
+        return (): void => {};
+    }
+
+    /**
+     * The calls performed against the target function or mocked implementation.
+     */
     public readonly calls: ICall[];
 
     protected readonly singleMockStack: MockImpl[];

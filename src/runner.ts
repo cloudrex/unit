@@ -2,18 +2,27 @@ import colors from "colors";
 import Util from "./util";
 import {IRunnerOpts, DefaultOpts} from "./options";
 
+/**
+ * Representation of a single test.
+ */
 export interface ITest {
     readonly description: string;
     readonly instance: (...args: any[]) => void;
     readonly args: Array<any[]>;
 }
 
+/**
+ * Representation of a unit test.
+ */
 export interface IUnit<T = any> {
     readonly name: string;
     readonly instance: T;
     readonly tests: ITest[];
 }
 
+/**
+ * Represents the various possible JavaScript entity types.
+ */
 export enum JsType {
     Object = "object",
     Function = "function",
@@ -25,14 +34,24 @@ export enum JsType {
     Boolean = "boolean"
 }
 
+/**
+ * An assertion rule that must be met.
+ */
 export type Constraint = (...args: any[]) => string | null;
 
+/**
+ * Represents an empty function.
+ */
 export type Action = () => void;
 
 export default abstract class Runner {
     public static before: Action | null = null;
     public static after: Action | null = null;
 
+    /**
+     * Run all registered tests.
+     * @param {IRunnerOpts} opts
+     */
     public static async test(opts?: IRunnerOpts): Promise<void> {
         const options: IRunnerOpts = {
             ...DefaultOpts,
@@ -71,6 +90,9 @@ export default abstract class Runner {
         }
     }
 
+    /**
+     * Clear all registered unit tests.
+     */
     public static clear(): void {
         Runner.units.clear();
     }
