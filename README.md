@@ -103,7 +103,7 @@ import {Mock} from "unit";
 let existingFn = (): number => 0;
 ```
 
-In this simple example, we would like to mock `existingFn` so that it returns `1` instead of `0`.
+In this simple example, we would like to mock the function `existingFn` so that it returns `1` instead of `0`.
 
 We can easily accomplish this functionality using the `returnOnce` helper function:
 
