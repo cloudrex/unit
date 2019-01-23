@@ -6,7 +6,7 @@
     "scripts": {
         "test": "npm run build && node dist/test/runner.js",
         "build": "tsc",
-        "prepublishOnly": "npm test && npm run build"
+        "prepublishOnly": "npm test"
     },
     "keywords": [
         "testing"
