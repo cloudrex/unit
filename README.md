@@ -148,5 +148,5 @@ What makes Unit different from the other various JavaScript testing frameworks, 
 * Built-in mocking utilities.
 * Broad range of useful assertion utilities.
 * Chainable methods with simple names; Less writing, more doing.
-* Tested codebase.
+* Cleverly self-tested codebase.
 * Full TypeScript support (It's written in it!).
