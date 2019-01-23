@@ -142,7 +142,7 @@ console.log(square(4)); // 8
 
 ### Why use Unit?
 
-What makes Unit different than the other various JavaScript testing frameworks, and why should I consider using it?
+What makes Unit different from the other various JavaScript testing frameworks, and why should I consider using it?
 
 * Simple, elegant decorator-based syntax.
 * Built-in mocking utilities.
