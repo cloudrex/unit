@@ -180,6 +180,10 @@ export abstract class Is {
         };
     }
 
+    /**
+     * Assert that input is an odd number.
+     * @return {Constraint}
+     */
     public static get odd(): Constraint {
         return (input: any) => {
             if (typeof input === "number" && !Util.isEven(input)) {
@@ -190,6 +194,10 @@ export abstract class Is {
         }
     }
 
+    /**
+     * Assert that input is an even number.
+     * @return {Constraint}
+     */
     public static get even(): Constraint {
         return (input: any) => {
             if (typeof input === "number" && Util.isEven(input)) {
@@ -202,16 +210,16 @@ export abstract class Is {
 
     /**
      * Assert that input is an instance of the specified class.
-     * @param {*} instance
+     * @param {*} parent
      * @return {Constraint}
      */
-    public static instanceOf(instance: any): Constraint {
+    public static instanceOf(parent: any): Constraint {
         return (input: any) => {
-            if (input instanceof instance) {
+            if (input instanceof parent) {
                 return null;
             }
 
-            return `Expected '${input}' to be an instance of '${instance}'`;
+            return `Expected '${input}' to be an instance of '${parent}'`;
         };
     }
 
