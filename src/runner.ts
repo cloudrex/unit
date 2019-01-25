@@ -217,7 +217,7 @@ export default abstract class Runner {
         const fail: string = colors.red("X");
         const prefixStr: string = prefix ? colors.gray("should") : "";
 
-        let timeStr: string = measure ? colors.white(`${totalTime}ms `) : "";
+        let timeStr: string = measure ? colors.gray(`${totalTime}ms `) : "";
 
         if (measure) {
             if (totalTime >= 3000) {
