@@ -87,7 +87,7 @@ export default abstract class Runner {
                     Runner.before();
                 }
 
-                if (await Runner.processTest(test, options.shouldPrefix, options.measureTime)) {
+                if (await Runner.processTest(test, count === 0, options.shouldPrefix, options.measureTime)) {
                     successful++;
                 }
 
@@ -178,7 +178,7 @@ export default abstract class Runner {
             }
         }
         catch (error) {
-            invokeResult = error;
+            invokeResult.error = error;
         }
 
         invokeResult.time = watch.stop();
@@ -186,7 +186,7 @@ export default abstract class Runner {
         return invokeResult;
     }
 
-    protected static async processTest(test: ITest, prefix: boolean = false, measure: boolean = false): Promise<boolean> {
+    protected static async processTest(test: ITest, isLast: boolean, prefix: boolean = false, measure: boolean = false): Promise<boolean> {
         // TODO: Inner array may still be referenced
         let testArgs: Array<any[]> = [...test.args];
 
@@ -232,13 +232,17 @@ export default abstract class Runner {
             console.log(`    ${timeStr}${check} ${prefixStr} ${desc}`);
         }
         else {
-            console.log(`    ${timeStr}${fail} ${prefixStr} ${desc}`);
+            console.log(`    ${timeStr}${fail} ${prefixStr} ${desc}\n`);
 
             let counter: number = 1;
 
             for (const error of errors) {
                 console.log("     ", colors.gray(`${counter}.`), colors.red(error.message));
                 counter++;
+            }
+
+            if (!isLast) {
+                console.log();
             }
         }
 
