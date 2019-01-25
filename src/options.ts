@@ -13,5 +13,5 @@ export const DefaultOpts: IRunnerOpts = {
     successExitCode: 0,
     supress: false,
     shouldPrefix: false,
-    measureTime: true
+    measureTime: false
 };
