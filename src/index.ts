@@ -4,6 +4,7 @@ import Runner, {Constraint, JsType} from "./runner";
 import {Unit, Test, Feed} from "./decorators";
 import Does from "./does";
 import Mock from "./mock";
+import Stopwatch from "./stopwatch";
 
 export {
     Assert,
@@ -15,5 +16,6 @@ export {
     Runner,
     Feed,
     Does,
-    Mock
+    Mock,
+    Stopwatch
 };

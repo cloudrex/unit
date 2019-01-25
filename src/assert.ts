@@ -7,7 +7,7 @@ export default abstract class Assert {
      * @param {*} input
      * @param {Constraint[]} constraints
      */
-    public static that(input: any, ...constraints: Constraint[]): void {
+    public static that(input: any[] | any, ...constraints: Constraint[]): void {
         for (const constraint of constraints) {
             const result: string | null = constraint(input);
 

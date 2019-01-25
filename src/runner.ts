@@ -1,6 +1,7 @@
 import colors from "colors";
 import Util from "./util";
 import {IRunnerOpts, DefaultOpts} from "./options";
+import Stopwatch from "./stopwatch";
 
 /**
  * Representation of a single test.
@@ -18,6 +19,11 @@ export interface IUnit<T = any> {
     readonly name: string;
     readonly instance: T;
     readonly tests: ITest[];
+}
+
+interface InvocationResult {
+    error?: Error;
+    time: number;
 }
 
 /**
@@ -45,7 +51,14 @@ export type Constraint = (...args: any[]) => string | null;
 export type Action = () => void;
 
 export default abstract class Runner {
+    /**
+     * The callback function that will be invoked before every test.
+     */
     public static before: Action | null = null;
+
+    /**
+     * The callback function that will be invoked after every test.
+     */
     public static after: Action | null = null;
 
     /**
@@ -58,9 +71,13 @@ export default abstract class Runner {
             ...opts
         };
 
+        const watch: Stopwatch = new Stopwatch();
+
         let firstUnit: boolean = true;
         let successful: number = 0;
         let count: number = 0;
+
+        watch.start();
 
         for await (const unit of Runner.units.values()) {
             Runner.processUnit(unit, firstUnit);
@@ -70,7 +87,7 @@ export default abstract class Runner {
                     Runner.before();
                 }
 
-                if (await Runner.processTest(test, options.shouldPrefix)) {
+                if (await Runner.processTest(test, options.shouldPrefix, options.measureTime)) {
                     successful++;
                 }
 
@@ -85,8 +102,9 @@ export default abstract class Runner {
         }
 
         const succeeded: boolean = successful === count;
+        const timeSuffix: string = colors.gray(`(${watch.stop()}ms)`);
 
-        console.log(colors.green(`\n  ${successful}/${count} {${Util.percentage(successful, count)}%} passing\n`));
+        console.log(colors.green(`\n  ${successful}/${count} {${Util.percentage(successful, count)}%} passing ${timeSuffix}\n`));
 
         if (options.exit) {
             process.exit(succeeded ? options.successExitCode : options.failureExitCode);
@@ -127,7 +145,9 @@ export default abstract class Runner {
     protected static units: Map<string, IUnit> = new Map();
 
     protected static processUnit(unit: IUnit, first: boolean = false): void {
-        console.log(`${!first ? "\n" : ""}  [${unit.name}]`);
+        const name: string = colors.cyan(`[${unit.name}]\n`);
+
+        console.log(`${!first ? "\n" : ""}  ${name}`);
 
         if (unit.tests.length === 0) {
             const question: string = colors.yellow("?");
@@ -137,28 +157,36 @@ export default abstract class Runner {
         }
     }
 
-    protected static async invokeTest(method: any, args: any[]): Promise<Error | null> {
-        let resultError: Error | null = null;
+    protected static async invokeTest(method: any, args: any[]): Promise<InvocationResult> {
+        let invokeResult: InvocationResult = {
+            time: 0
+        };
+
+        const watch: Stopwatch = new Stopwatch();
+
+        watch.start();
 
         try {
             const result: any = method(...args);
 
             if (result instanceof Promise) {
                 result.catch((error: Error) => {
-                    resultError = error;
+                    invokeResult.error = error;
                 });
 
                 await result;
             }
         }
         catch (error) {
-            resultError = error;
+            invokeResult = error;
         }
 
-        return resultError;
+        invokeResult.time = watch.stop();
+
+        return invokeResult;
     }
 
-    protected static async processTest(test: ITest, prefix: boolean = false): Promise<boolean> {
+    protected static async processTest(test: ITest, prefix: boolean = false, measure: boolean = false): Promise<boolean> {
         // TODO: Inner array may still be referenced
         let testArgs: Array<any[]> = [...test.args];
 
@@ -169,12 +197,18 @@ export default abstract class Runner {
 
         const errors: Error[] = [];
 
+        let totalTime: number = 0;
+
         // Feed all provided in-line data
         for await (const args of testArgs) {
-            const error: Error | null = await Runner.invokeTest(test.instance, args);
+            const result: InvocationResult = await Runner.invokeTest(test.instance, args);
 
-            if (error !== null) {
-                errors.push(error);
+            if (result.error !== undefined) {
+                errors.push(result.error);
+            }
+
+            if (measure) {
+                totalTime += result.time;
             }
         }
 
@@ -183,14 +217,28 @@ export default abstract class Runner {
         const fail: string = colors.red("X");
         const prefixStr: string = prefix ? colors.gray("should") : "";
 
+        let timeStr: string = measure ? colors.white(`${totalTime}ms `) : "";
+
+        if (measure) {
+            if (totalTime >= 3000) {
+                timeStr = colors.red(timeStr);
+            }
+            else if (totalTime >= 1500) {
+                timeStr = colors.yellow(timeStr);
+            }
+        }
+
         if (errors.length === 0) {
-            console.log(`    ${check} ${prefixStr} ${desc}`);
+            console.log(`    ${timeStr}${check} ${prefixStr} ${desc}`);
         }
         else {
-            console.log(`    ${fail} ${prefixStr} ${desc}`);
+            console.log(`    ${timeStr}${fail} ${prefixStr} ${desc}`);
+
+            let counter: number = 1;
 
             for (const error of errors) {
-                console.log(error.message);
+                console.log("     ", colors.gray(`${counter}.`), colors.red(error.message));
+                counter++;
             }
         }
 
