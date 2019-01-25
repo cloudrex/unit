@@ -87,7 +87,7 @@ export default abstract class Runner {
                     Runner.before();
                 }
 
-                if (await Runner.processTest(test, count === 0, options.shouldPrefix, options.measureTime)) {
+                if (await Runner.processTest(test, count === Runner.units.size - 1, options.shouldPrefix, options.measureTime)) {
                     successful++;
                 }
 
