@@ -1,4 +1,3 @@
-import colors from "colors";
 import {Constraint, Action} from "./runner";
 
 export default abstract class Assert {
@@ -92,7 +91,7 @@ export default abstract class Assert {
     }
 
     protected static complain(message: string): void {
-        throw new Error(colors.red(`      ${message}`));
+        throw new Error(message);
     }
 }
 
