@@ -33,8 +33,8 @@ export default abstract class Assert {
 
     /**
      * Assert that two entities are not equal.
-     * @param entity1
-     * @param entity2
+     * @param {*} entity1
+     * @param {*} entity2
      */
     public static notEqual(entity1: any, entity2: any): void {
         if (entity1 === entity2) {
