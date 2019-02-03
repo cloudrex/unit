@@ -20,6 +20,7 @@ export abstract class Is {
 
     /**
      * Assert that input is a number less than specified.
+     * @param {number} num
      * @return {Constraint}
      */
     public static lessThan(num: number): Constraint {
@@ -29,6 +30,36 @@ export abstract class Is {
             }
 
             return `Expected '${input}' to be greater than '${num}'`;
+        };
+    }
+
+    /**
+     * Assert that input is greater or equal to specified.
+     * @param {number} num
+     * @return {Constraint}
+     */
+    public static greaterOrEqual(num: number): Constraint {
+        return (input: any) => {
+            if (input > num || input === num) {
+                return null;
+            }
+
+            return `Expected '${input}' to be greater or equal to '${num}'`;
+        };
+    }
+
+    /**
+     * Assert that input is less or equal to specified.
+     * @param {number} num
+     * @return {Constraint}
+     */
+    public static lessOrEqual(num: number): Constraint {
+        return (input: any) => {
+            if (input < num || input === num) {
+                return null;
+            }
+
+            return `Expected '${input}' to be less or equal to '${num}'`;
         };
     }
 
