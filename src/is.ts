@@ -172,7 +172,7 @@ export abstract class Is {
      */
     public static get NaN(): Constraint {
         return (input: any) => {
-            if (isNaN(input)) {
+            if (typeof input === "number" && isNaN(input)) {
                 return null;
             }
 
@@ -339,7 +339,7 @@ export abstract class Is {
      */
     public static get defined(): Constraint {
         return (input: any) => {
-            if (typeof input !== "undefined" && !isNaN(input) && input !== null) {
+            if (typeof input !== "undefined" && (typeof input === "number" && !isNaN(input)) && input !== null) {
                 return null;
             }
 
