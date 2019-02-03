@@ -334,6 +334,20 @@ export abstract class Is {
     }
 
     /**
+     * Assert that input is neither undefined, null, or NaN.
+     * @return {Constraint}
+     */
+    public static get defined(): Constraint {
+        return (input: any) => {
+            if (typeof input !== "undefined" && !isNaN(input) && input !== null) {
+                return null;
+            }
+
+            return `Expected '${input}' to be defined`;
+        };
+    }
+
+    /**
      * Assert that input is a symbol.
      * @return {Constraint}
      */
