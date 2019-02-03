@@ -23,7 +23,10 @@ export default abstract class Assert {
      * @param {*} entity2
      */
     public static equal(entity1: any, entity2: any): void {
-        if (entity1 !== entity2) {
+        if (typeof entity1 !== typeof entity2) {
+            Assert.complain(`Expected type of '${entity1}' (${typeof entity1}) to equal type of '${entity2}' (${typeof entity2})`);
+        }
+        else if (entity1 !== entity2) {
             Assert.complain(`Expected '${entity1}' to equal '${entity2}'`);
         }
     }
