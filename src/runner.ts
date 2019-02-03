@@ -237,7 +237,7 @@ export default abstract class Runner {
             let counter: number = 1;
 
             for (const error of errors) {
-                console.log("     ", colors.gray(`${counter}.`), colors.red(error.message));
+                console.log("     ", colors.gray(`${counter}. `) + colors.red(error.message));
                 counter++;
             }
 
