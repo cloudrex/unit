@@ -71,9 +71,9 @@ export default abstract class Assert {
         let resultError: Error | null = null;
         let methodName: string = method.name;
 
-        // Anonymous method
+        // Anonymous method.
         if (methodName === "") {
-            methodName = "Anonymous";
+            methodName = "anonymous";
         }
 
         try {
@@ -84,10 +84,40 @@ export default abstract class Assert {
         }
 
         if (resultError === null) {
-            Assert.complain(`Expected '${methodName}' to throw`);
+            Assert.complain(`Expected function '${methodName}' to throw`);
         }
         else if (message !== undefined && resultError.message !== message) {
-            Assert.complain(`Expected '${methodName}' to throw with message '${message}' but got '${resultError.message}' instead`);
+            Assert.complain(`Expected function '${methodName}' to throw with message '${message}' but got '${resultError.message}' instead`);
+        }
+    }
+
+    // TODO: Simplify/merge with the 'throw()' method somehow without having to copy the entire function.
+    /**
+     * Assert that the input async method throws an error.
+     * @param {Action} method
+     * @param {string | undefined} message
+     */
+    public static async throwsAsync(method: Action, message?: string): Promise<void> {
+        let resultError: Error | null = null;
+        let methodName: string = method.name;
+
+        // Anonymous method.
+        if (methodName === "") {
+            methodName = "anonymous";
+        }
+
+        try {
+            await method();
+        }
+        catch (error) {
+            resultError = error;
+        }
+
+        if (resultError === null) {
+            Assert.complain(`Expected async function '${methodName}' to throw`);
+        }
+        else if (message !== undefined && resultError.message !== message) {
+            Assert.complain(`Expected async function '${methodName}' to throw with message '${message}' but got '${resultError.message}' instead`);
         }
     }
 
