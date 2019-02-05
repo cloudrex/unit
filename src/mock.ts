@@ -61,8 +61,8 @@ export default class Mock {
         this.pipes = [];
         this.target = target;
 
-        // Bind invoker
-        this.invoker = this.invoker.bind(this);
+        // Bind proxy.
+        this.proxy = this.proxy.bind(this);
     }
 
     /**
@@ -70,7 +70,7 @@ export default class Mock {
      * @param {Array<*>} args Arguments that will be passed to the target or mocked implementation.
      * @return {*} The returned result of the target or mocked implementation.
      */
-    public invoker(...args: any[]): any {
+    public proxy(...args: any[]): any {
         let result: any = undefined;
 
         // Create and register the call before invoking the implementation.
@@ -96,7 +96,7 @@ export default class Mock {
             result = this.target(...args);
         }
 
-        // Invoke all registered pipes
+        // Invoke all registered pipes.
         for (const pipe of this.pipes) {
             pipe(call);
         }

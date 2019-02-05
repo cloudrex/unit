@@ -52,7 +52,7 @@ default class {
         let fn = (): number => 0;
 
         // Mock the test function.
-        fn = Mock.fn(fn).invoker;
+        fn = Mock.fn(fn).proxy;
 
         Assert.equal(fn(), 0);
     }
@@ -64,7 +64,7 @@ default class {
         fn = Mock.fn(fn)
             .once((): number => 2)
             .once((): number => 3)
-            .invoker;
+            .proxy;
 
         Assert.equal(fn(), 2);
         Assert.equal(fn(), 3);
@@ -78,7 +78,7 @@ default class {
         // Mock the test function.
         fn = Mock.fn(fn)
             .returnOnce(2)
-            .invoker;
+            .proxy;
 
         Assert.equal(fn(), 2);
         Assert.equal(fn(), 1);
