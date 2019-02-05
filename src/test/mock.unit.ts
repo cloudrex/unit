@@ -1,18 +1,18 @@
-import {Unit, Test} from "../decorators";
+import {test, unit} from "../decorators";
 import Mock from "../mock";
 import Assert from "../assert";
 import {Is} from "../is";
 
 const emptyFn = (): void => {};
 
-@Unit("Mock")
+@unit("Mock")
 default class {
-    @Test("return a mock instance upon statically creating mock")
+    @test("return a mock instance upon statically creating mock")
     public mockFn(): void {
         Assert.that(Mock.fn(emptyFn), Is.instanceOf(Mock));
     }
 
-    @Test("register a single mock implementation")
+    @test("register a single mock implementation")
     public once(): void {
         const mock: Mock = Mock.fn(emptyFn);
 
@@ -25,7 +25,7 @@ default class {
         Assert.that(mock["singleMockStack"], Is.arrayWithLength(1));
     }
 
-    @Test("assign the permanent implementation")
+    @test("assign the permanent implementation")
     public always(): void {
         const mock: Mock = Mock.fn(emptyFn);
 
@@ -38,7 +38,7 @@ default class {
         Assert.that(mock["permanentImpl"], Is.function);
     }
 
-    @Test("be able to remove permanent implementation")
+    @test("be able to remove permanent implementation")
     public alwaysRemove(): void {
         const mock: Mock = Mock.fn(emptyFn)
             .always((): void => {})
@@ -47,7 +47,7 @@ default class {
         Assert.that(mock["permanentImpl"], Is.undefined);
     }
 
-    @Test("invoke a mocked function")
+    @test("invoke a mocked function")
     public invoke(): void {
         let fn = (): number => 0;
 
@@ -57,7 +57,7 @@ default class {
         Assert.equal(fn(), 0);
     }
 
-    @Test("mock a function once with various implementations")
+    @test("mock a function once with various implementations")
     public onceMultiple(): void {
         let fn = (): number => 1;
 
@@ -71,7 +71,7 @@ default class {
         Assert.equal(fn(), 1);
     }
 
-    @Test("mock a function result once")
+    @test("mock a function result once")
     public onceResult(): void {
         let fn = (): number => 1;
 
