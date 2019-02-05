@@ -190,7 +190,12 @@ export abstract class Is {
             const inputType: JsType = typeof input as JsType;
 
             if (inputType === type) {
-                return null;
+                if (inputType === JsType.Object && input !== null) {
+                    return null;
+                }
+                else if (inputType !== JsType.Object) {
+                    return null;
+                }
             }
 
             return `Expected '${input}' to be of type '${type}' but got '${inputType}'`;
