@@ -5,6 +5,7 @@ import {unit, test, feed} from "./decorators";
 import Does from "./does";
 import Mock from "./mock";
 import Stopwatch from "./stopwatch";
+import DataSet, {OmitConflictingType} from "./data-set";
 
 export {
     Assert,
@@ -17,5 +18,7 @@ export {
     feed,
     Does,
     Mock,
-    Stopwatch
+    Stopwatch,
+    DataSet,
+    OmitConflictingType as OmitType
 };
