@@ -1,6 +1,55 @@
 import {Constraint, Action} from "./runner";
+import {Is} from "./is";
 
 export default abstract class Assert {
+    /**
+     * Shorthand alias for Is.null.
+     * @param input The input value to assert.
+     */
+    public null(input: any): void {
+        Assert.that(input, Is.null);
+    }
+
+    /**
+     * Shorthand alias for Is.empty.
+     * @param input The input value to assert.
+     */
+    public empty(input: any): void {
+        Assert.that(input, Is.empty);
+    }
+
+    /**
+     * Shorthand alias for Is.string.
+     * @param input The input value to assert.
+     */
+    public string(input: any): void {
+        Assert.that(input, Is.string);
+    }
+
+    /**
+     * Shorthand alias for Is.object.
+     * @param input The input value to assert.
+     */
+    public object(input: any): void {
+        Assert.that(input, Is.object);
+    }
+
+    /**
+     * Shorthand alias for Is.number.
+     * @param input The input value to assert.
+     */
+    public number(input: any): void {
+        Assert.that(input, Is.number);
+    }
+
+    /**
+     * Shorthand alias for Is.boolean.
+     * @param input The input value to assert.
+     */
+    public boolean(input: any): void {
+        Assert.that(input, Is.boolean);
+    }
+
     /**
      * Assert that input satisfies the specified constraint(s).
      * @param {*} input
