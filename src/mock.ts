@@ -21,11 +21,12 @@ export interface ICall {
 
 export default class Mock {
     /**
+     * Create a Mock instance with the specified function. Proxy is automatically applied.
      * @param {*} target The target function to mock.
      * @return {Mock} A new mock class instance.
      */
     public static fn(target: any): Mock {
-        return new Mock(target);
+        return new Mock(target).apply();
     }
 
     /**
@@ -43,8 +44,9 @@ export default class Mock {
 
     protected readonly singleMockStack: MockImpl[];
     protected readonly pipes: Pipe[];
-    protected readonly target: any;
+    protected readonly original: any;
 
+    protected target: any;
     protected permanentImpl?: MockImpl;
 
     /**
@@ -59,10 +61,21 @@ export default class Mock {
         this.calls = [];
         this.singleMockStack = [];
         this.pipes = [];
+        this.original = target;
         this.target = target;
 
-        // Bind proxy.
+        // Bind proxy with the local context.
         this.proxy = this.proxy.bind(this);
+    }
+
+    /**
+     * Apply the proxy to the target, permanently overriding the target function with the proxy.
+     * @return {this}
+     */
+    public apply(): this {
+        this.target = this.proxy;
+
+        return this;
     }
 
     /**
@@ -91,9 +104,9 @@ export default class Mock {
             result = this.singleMockStack[0](...args);
             this.singleMockStack.splice(0, 1);
         }
-        // Finally, if the single-mock stack is empty, invoke the original.
+        // Finally, if the single-mock stack is empty, invoke the original function.
         else {
-            result = this.target(...args);
+            result = this.original(...args);
         }
 
         // Invoke all registered pipes.

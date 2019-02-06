@@ -3,38 +3,38 @@ import Assert from "../assert";
 
 @unit("Assert")
 default class {
-    @test("assert")
+    @test("should assert")
     public that(): void {
         Assert.that(null, () => {
             return null;
         });
     }
 
-    @test("assert whether throws")
+    @test("should assert whether throws")
     public throws(): void {
         Assert.throws(() => {
             throw new Error("test");
         });
     }
 
-    @test("whether throws with message")
+    @test("should whether throws with message")
     public throwsWithMessage(): void {
         Assert.throws(() => {
             throw new Error("test");
         }, "test");
     }
 
-    @test("assert whether true")
+    @test("should assert whether true")
     public true(): void {
         Assert.true(true);
     }
 
-    @test("assert whether false")
+    @test("should assert whether false")
     public false(): void {
         Assert.false(false);
     }
 
-    @test("assert whether equal")
+    @test("should assert whether equal")
     @feed("test", "test")
     @feed(1, 1)
     @feed(0, 0)
@@ -45,7 +45,7 @@ default class {
         Assert.equal(entity1, entity2);
     }
 
-    @test("assert whether not equal")
+    @test("should assert whether not equal")
     @feed("john", "doe")
     @feed(0, 1)
     @feed(undefined, null)

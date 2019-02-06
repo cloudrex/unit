@@ -4,7 +4,7 @@ import Assert from "../assert";
 
 @unit("Does")
 default class {
-    @test("assert whether ends with")
+    @test("should assert whether ends with")
     @feed("john doe", "doe")
     @feed("john doe", "john doe")
     @feed("doe", "e")
@@ -12,7 +12,7 @@ default class {
         Assert.that(input, Does.endWith(expected));
     }
 
-    @test("assert whether starts with")
+    @test("should assert whether starts with")
     @feed("john doe", "john")
     @feed("john doe", "john doe")
     @feed("doe", "d")
@@ -20,14 +20,14 @@ default class {
         Assert.that(input, Does.startWith(expected));
     }
 
-    @test("assert whether matches pattern")
+    @test("should assert whether matches pattern")
     @feed("john doe", /^john/)
     @feed("john doe", /doe$/)
     public match(input: string, pattern: RegExp): void {
         Assert.that(input, Does.match(pattern));
     }
 
-    @test("assert whether has property")
+    @test("should assert whether has property")
     @feed({
         name: "john"
     }, "name")
@@ -40,7 +40,7 @@ default class {
         Assert.that(obj, Does.haveProperty(name));
     }
 
-    @test("assert whether has length")
+    @test("should assert whether has length")
     @feed([], 0)
     @feed(["john"], 1)
     @feed(["john", "doe"], 2)
