@@ -223,7 +223,7 @@ export default abstract class Runner {
         const target: string | undefined = (test.instance as any).$$unit_target;
 
         if (target !== undefined) {
-            prefixStr += colors.white(target);
+            prefixStr += colors.white(target + "()");
         }
 
         // Append 'should' to the prefix if applicable.
@@ -234,6 +234,11 @@ export default abstract class Runner {
             }
 
             prefixStr += colors.gray("Should")
+        }
+
+        // Append an extra space to separate from 'desc' if applicable.
+        if (prefixStr !== "") {
+            prefixStr += " ";
         }
 
         // Finally, create the time string.
@@ -249,10 +254,10 @@ export default abstract class Runner {
         }
 
         if (errors.length === 0) {
-            console.log(`    ${timeStr}${check} ${prefixStr} ${desc}`);
+            console.log(`    ${timeStr}${check} ${prefixStr}${desc}`);
         }
         else {
-            console.log(`    ${timeStr}${fail} ${prefixStr} ${desc}\n`);
+            console.log(`    ${timeStr}${fail} ${prefixStr}${desc}\n`);
 
             let counter: number = 1;
 

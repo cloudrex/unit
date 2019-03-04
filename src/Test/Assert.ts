@@ -4,6 +4,7 @@ import Assert from "../Assert";
 @Unit("Assert")
 default class {
     @Test("Should assert")
+    @Target(Assert.that)
     public that(): void {
         Assert.that(null, () => {
             return null;
@@ -11,6 +12,7 @@ default class {
     }
 
     @Test("Should assert whether throws")
+    @Target(Assert.throws)
     public throws(): void {
         Assert.throws(() => {
             throw new Error("test");
@@ -18,6 +20,7 @@ default class {
     }
 
     @Test("Should whether throws with message")
+    @Target(Assert.throws)
     public throwsWithMessage(): void {
         Assert.throws(() => {
             throw new Error("test");
@@ -25,17 +28,19 @@ default class {
     }
 
     @Test("Should assert whether true")
+    @Target(Assert.true)
     public true(): void {
         Assert.true(true);
     }
 
     @Test("Should assert whether false")
+    @Target(Assert.false)
     public false(): void {
         Assert.false(false);
     }
 
     @Test("Should assert whether equal")
-    @Target(Assert.prototype.empty)
+    @Target(Assert.equal)
     @Feed("test", "test")
     @Feed(1, 1)
     @Feed(0, 0)

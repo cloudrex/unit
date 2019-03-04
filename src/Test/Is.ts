@@ -1,4 +1,4 @@
-import {Test, Unit, Feed} from "../Decorators";
+import {Test, Unit, Feed, Target} from "../Decorators";
 import Assert from "../Assert";
 import {Is} from "../Is";
 import {JsType} from "../Runner";

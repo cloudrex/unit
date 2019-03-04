@@ -1,4 +1,4 @@
-import {Test, Unit} from "../Decorators";
+import {Test, Unit, Target} from "../Decorators";
 import Mock from "../Mock";
 import Assert from "../Assert";
 import {Is} from "../Is";
@@ -8,11 +8,13 @@ const emptyFn = (): void => {};
 @Unit("Mock")
 default class {
     @Test("Should return a mock instance upon statically creating mock")
+    @Target(Mock.fn)
     public mockFn(): void {
         Assert.that(Mock.fn(emptyFn), Is.instanceOf(Mock));
     }
 
     @Test("Should register a single mock implementation")
+    @Target(Mock.prototype.once)
     public once(): void {
         const mock: Mock = Mock.fn(emptyFn);
 
@@ -26,6 +28,7 @@ default class {
     }
 
     @Test("Should assign the permanent implementation")
+    @Target(Mock.prototype.always)
     public always(): void {
         const mock: Mock = Mock.fn(emptyFn);
 
@@ -39,6 +42,7 @@ default class {
     }
 
     @Test("Should be able to remove permanent implementation")
+    @Target(Mock.prototype.always)
     public alwaysRemove(): void {
         const mock: Mock = Mock.fn(emptyFn)
             .always((): void => {})
@@ -48,6 +52,7 @@ default class {
     }
 
     @Test("Should invoke a mocked function")
+    @Target(Mock.fn)
     public invoke(): void {
         let fn = (): number => 0;
 
@@ -58,6 +63,7 @@ default class {
     }
 
     @Test("Should mock a function once with various implementations")
+    @Target(Mock.prototype.once)
     public onceMultiple(): void {
         let fn = (): number => 1;
 
@@ -72,6 +78,7 @@ default class {
     }
 
     @Test("Should mock a function result once")
+    @Target(Mock.prototype.returnOnce)
     public onceResult(): void {
         let fn = (): number => 1;
 

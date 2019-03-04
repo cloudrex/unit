@@ -70,16 +70,14 @@ export function Unit(name?: string): any {
 /**
  * Mark a test with the specified target method's name.
  */
-export function Target(prototype: any): any {
+export function Target(instance: any): any {
     return function (target: any, prop: string) {
-        console.log(target);
-
-        if (typeof prototype !== "object" || typeof prototype.name !== "string") {
+        if (typeof instance !== "function" || typeof instance.name !== "string") {
             throw new Error("Invalid prototype specified");
         }
 
         // Mark function with the corresponding target.
-        target[prop].$$unit_target = prototype.name;
+        target[prop].$$unit_target = instance.name;
     };
 }
 

@@ -1,10 +1,11 @@
-import {Test, Unit, Feed} from "../Decorators";
+import {Test, Unit, Feed, Target} from "../Decorators";
 import Does from "../Does";
 import Assert from "../Assert";
 
 @Unit("Does")
 default class {
     @Test("Should assert whether ends with")
+    @Target(Does.endWith)
     @Feed("john doe", "doe")
     @Feed("john doe", "john doe")
     @Feed("doe", "e")
@@ -13,6 +14,7 @@ default class {
     }
 
     @Test("Should assert whether starts with")
+    @Target(Does.startWith)
     @Feed("john doe", "john")
     @Feed("john doe", "john doe")
     @Feed("doe", "d")
@@ -21,6 +23,7 @@ default class {
     }
 
     @Test("Should assert whether matches pattern")
+    @Target(Does.match)
     @Feed("john doe", /^john/)
     @Feed("john doe", /doe$/)
     public match(input: string, pattern: RegExp): void {
@@ -28,6 +31,7 @@ default class {
     }
 
     @Test("Should assert whether has property")
+    @Target(Does.haveProperty)
     @Feed({
         name: "john"
     }, "name")
@@ -41,6 +45,7 @@ default class {
     }
 
     @Test("Should assert whether has length")
+    @Target(Does.haveLength)
     @Feed([], 0)
     @Feed(["john"], 1)
     @Feed(["john", "doe"], 2)
