@@ -1,6 +1,6 @@
 {
     "name": "unit",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "description": "The JavaScript unit testing framework for perfectionists",
     "main": "dist/Index.js",
     "scripts": {
