@@ -12,13 +12,13 @@ export {
     Is,
     Constraint,
     JsType,
-    Unit as unit,
-    Test as test,
+    Unit,
+    Test,
     Runner,
-    Feed as feed,
+    Feed,
     Does,
     Mock,
     Stopwatch,
     DataSet,
-    OmitConflictingType as OmitType
+    OmitConflictingType
 };
