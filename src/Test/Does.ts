@@ -1,49 +1,49 @@
-import {test, unit, feed} from "../Decorators";
+import {Test, Unit, Feed} from "../Decorators";
 import Does from "../Does";
 import Assert from "../Assert";
 
-@unit("Does")
+@Unit("Does")
 default class {
-    @test("should assert whether ends with")
-    @feed("john doe", "doe")
-    @feed("john doe", "john doe")
-    @feed("doe", "e")
+    @Test("should assert whether ends with")
+    @Feed("john doe", "doe")
+    @Feed("john doe", "john doe")
+    @Feed("doe", "e")
     public endWith(input: string, expected: string): void {
         Assert.that(input, Does.endWith(expected));
     }
 
-    @test("should assert whether starts with")
-    @feed("john doe", "john")
-    @feed("john doe", "john doe")
-    @feed("doe", "d")
+    @Test("should assert whether starts with")
+    @Feed("john doe", "john")
+    @Feed("john doe", "john doe")
+    @Feed("doe", "d")
     public startWith(input: string, expected: string): void {
         Assert.that(input, Does.startWith(expected));
     }
 
-    @test("should assert whether matches pattern")
-    @feed("john doe", /^john/)
-    @feed("john doe", /doe$/)
+    @Test("should assert whether matches pattern")
+    @Feed("john doe", /^john/)
+    @Feed("john doe", /doe$/)
     public match(input: string, pattern: RegExp): void {
         Assert.that(input, Does.match(pattern));
     }
 
-    @test("should assert whether has property")
-    @feed({
+    @Test("should assert whether has property")
+    @Feed({
         name: "john"
     }, "name")
-    @feed({
+    @Feed({
         name: "doe",
         age: 21
     }, "age")
-    @feed([], "length")
+    @Feed([], "length")
     public haveProperty(obj: object, name: string): void {
         Assert.that(obj, Does.haveProperty(name));
     }
 
-    @test("should assert whether has length")
-    @feed([], 0)
-    @feed(["john"], 1)
-    @feed(["john", "doe"], 2)
+    @Test("should assert whether has length")
+    @Feed([], 0)
+    @Feed(["john"], 1)
+    @Feed(["john", "doe"], 2)
     public haveLength(arr: any[], length: number): void {
         Assert.that(arr, Does.haveLength(length));
     }

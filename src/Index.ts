@@ -1,7 +1,7 @@
 import {Is} from "./Is";
 import Assert from "./Assert";
 import Runner, {Constraint, JsType} from "./Runner";
-import {unit, test, feed} from "./Decorators";
+import {Unit, Test, Feed} from "./Decorators";
 import Does from "./Does";
 import Mock from "./Mock";
 import Stopwatch from "./Stopwatch";
@@ -12,10 +12,10 @@ export {
     Is,
     Constraint,
     JsType,
-    unit,
-    test,
+    Unit as unit,
+    Test as test,
     Runner,
-    feed,
+    Feed as feed,
     Does,
     Mock,
     Stopwatch,

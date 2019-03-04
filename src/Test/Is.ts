@@ -1,107 +1,107 @@
-import {test, unit, feed} from "../Decorators";
+import {Test, Unit, Feed} from "../Decorators";
 import Assert from "../Assert";
 import {Is} from "../Is";
 import {JsType} from "../Runner";
 
-@unit("Is")
+@Unit("Is")
 default class {
-    @test("should assert whether is empty")
-    @feed("")
-    @feed(null)
-    @feed(undefined)
-    @feed([])
-    @feed({})
+    @Test("should assert whether is empty")
+    @Feed("")
+    @Feed(null)
+    @Feed(undefined)
+    @Feed([])
+    @Feed({})
     public empty(input: any): void {
         Assert.that(input, Is.empty);
     }
 
-    @test("should assert whether is empty string")
-    @feed("")
+    @Test("should assert whether is empty string")
+    @Feed("")
     public emptyString(input: string): void {
         Assert.that(input, Is.emptyString);
     }
 
-    @test("should assert whether is null")
-    @feed(null)
+    @Test("should assert whether is null")
+    @Feed(null)
     public null(input: any): void {
         Assert.that(input, Is.null);
     }
 
-    @test("should assert whether is undefined")
-    @feed(undefined)
+    @Test("should assert whether is undefined")
+    @Feed(undefined)
     public undefined(input: any): void {
         Assert.that(input, Is.undefined);
     }
 
-    @test("should assert whether is positive")
-    @feed(1)
+    @Test("should assert whether is positive")
+    @Feed(1)
     public positive(input: number): void {
         Assert.that(input, Is.positive);
     }
 
-    @test("should assert whether is negative")
-    @feed(-1)
+    @Test("should assert whether is negative")
+    @Feed(-1)
     public negative(input: number): void {
         Assert.that(input, Is.negative);
     }
 
-    @test("should assert whether is neutral")
-    @feed(0)
+    @Test("should assert whether is neutral")
+    @Feed(0)
     public neutral(input: number): void {
         Assert.that(input, Is.neutral);
     }
 
-    @test("should assert whether is greater than")
-    @feed(1, 0)
-    @feed(-1, -2)
-    @feed(0, -1)
+    @Test("should assert whether is greater than")
+    @Feed(1, 0)
+    @Feed(-1, -2)
+    @Feed(0, -1)
     public greaterThan(input: number, greaterThan: number): void {
         Assert.that(input, Is.greaterThan(greaterThan));
     }
 
-    @test("should assert whether is less than")
-    @feed(0, 1)
-    @feed(-2, -1)
-    @feed(-1, 0)
+    @Test("should assert whether is less than")
+    @Feed(0, 1)
+    @Feed(-2, -1)
+    @Feed(-1, 0)
     public lessThan(input: number, lessThan: number): void {
         Assert.that(input, Is.lessThan(lessThan));
     }
 
-    @test("should assert whether is NaN")
-    @feed(0 / 0)
+    @Test("should assert whether is NaN")
+    @Feed(0 / 0)
     public NaN(input: number): void {
         Assert.that(input, Is.NaN);
     }
 
-    @test("should assert whether is array")
-    @feed([])
-    @feed([1, 2, 3])
-    @feed([undefined, null])
-    @feed([""])
+    @Test("should assert whether is array")
+    @Feed([])
+    @Feed([1, 2, 3])
+    @Feed([undefined, null])
+    @Feed([""])
     public array(input: any[]): void {
         Assert.that(input, Is.array);
     }
 
-    @test("should assert whether is array of type")
-    @feed([1, 2, 3], JsType.Number)
-    @feed(["john", "doe"], JsType.String)
+    @Test("should assert whether is array of type")
+    @Feed([1, 2, 3], JsType.Number)
+    @Feed(["john", "doe"], JsType.String)
     public arrayType(input: any[], type: JsType): void {
         Assert.that(input, Is.arrayOf(type));
     }
 
-    @test("should assert whether is odd")
-    @feed(1)
-    @feed(3)
-    @feed(-1)
-    @feed(-3)
+    @Test("should assert whether is odd")
+    @Feed(1)
+    @Feed(3)
+    @Feed(-1)
+    @Feed(-3)
     public odd(input: number): void {
         Assert.that(input, Is.odd);
     }
 
-    @test("should assert whether is even")
-    @feed(0)
-    @feed(2)
-    @feed(-2)
+    @Test("should assert whether is even")
+    @Feed(0)
+    @Feed(2)
+    @Feed(-2)
     public even(input: number): void {
         Assert.that(input, Is.even);
     }

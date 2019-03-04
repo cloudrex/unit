@@ -1,18 +1,18 @@
-import {test, unit} from "../Decorators";
+import {Test, Unit} from "../Decorators";
 import Mock from "../Mock";
 import Assert from "../Assert";
 import {Is} from "../Is";
 
 const emptyFn = (): void => {};
 
-@unit("Mock")
+@Unit("Mock")
 default class {
-    @test("should return a mock instance upon statically creating mock")
+    @Test("should return a mock instance upon statically creating mock")
     public mockFn(): void {
         Assert.that(Mock.fn(emptyFn), Is.instanceOf(Mock));
     }
 
-    @test("should register a single mock implementation")
+    @Test("should register a single mock implementation")
     public once(): void {
         const mock: Mock = Mock.fn(emptyFn);
 
@@ -25,7 +25,7 @@ default class {
         Assert.that(mock["singleMockStack"], Is.arrayWithLength(1));
     }
 
-    @test("should assign the permanent implementation")
+    @Test("should assign the permanent implementation")
     public always(): void {
         const mock: Mock = Mock.fn(emptyFn);
 
@@ -38,7 +38,7 @@ default class {
         Assert.that(mock["permanentImpl"], Is.function);
     }
 
-    @test("should be able to remove permanent implementation")
+    @Test("should be able to remove permanent implementation")
     public alwaysRemove(): void {
         const mock: Mock = Mock.fn(emptyFn)
             .always((): void => {})
@@ -47,7 +47,7 @@ default class {
         Assert.that(mock["permanentImpl"], Is.undefined);
     }
 
-    @test("should invoke a mocked function")
+    @Test("should invoke a mocked function")
     public invoke(): void {
         let fn = (): number => 0;
 
@@ -57,7 +57,7 @@ default class {
         Assert.equal(fn(), 0);
     }
 
-    @test("should mock a function once with various implementations")
+    @Test("should mock a function once with various implementations")
     public onceMultiple(): void {
         let fn = (): number => 1;
 
@@ -71,7 +71,7 @@ default class {
         Assert.equal(fn(), 1);
     }
 
-    @test("should mock a function result once")
+    @Test("should mock a function result once")
     public onceResult(): void {
         let fn = (): number => 1;
 
