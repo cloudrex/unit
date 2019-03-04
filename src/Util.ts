@@ -26,6 +26,9 @@ export default abstract class Util {
         return Math.round(amount / max * 100);
     }
 
+    /**
+     * Determine whether a number is even.
+     */
     public static isEven(num: number): boolean {
         return Math.abs(num) % 2 === 0;
     }
