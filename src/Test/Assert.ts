@@ -1,40 +1,41 @@
-import {Test, Unit, Feed} from "../Decorators";
+import {Test, Unit, Feed, Target} from "../Decorators";
 import Assert from "../Assert";
 
 @Unit("Assert")
 default class {
-    @Test("should assert")
+    @Test("Should assert")
     public that(): void {
         Assert.that(null, () => {
             return null;
         });
     }
 
-    @Test("should assert whether throws")
+    @Test("Should assert whether throws")
     public throws(): void {
         Assert.throws(() => {
             throw new Error("test");
         });
     }
 
-    @Test("should whether throws with message")
+    @Test("Should whether throws with message")
     public throwsWithMessage(): void {
         Assert.throws(() => {
             throw new Error("test");
         }, "test");
     }
 
-    @Test("should assert whether true")
+    @Test("Should assert whether true")
     public true(): void {
         Assert.true(true);
     }
 
-    @Test("should assert whether false")
+    @Test("Should assert whether false")
     public false(): void {
         Assert.false(false);
     }
 
-    @Test("should assert whether equal")
+    @Test("Should assert whether equal")
+    @Target(Assert.prototype.empty)
     @Feed("test", "test")
     @Feed(1, 1)
     @Feed(0, 0)
@@ -45,7 +46,8 @@ default class {
         Assert.equal(entity1, entity2);
     }
 
-    @Test("should assert whether not equal")
+    @Test("Should assert whether not equal")
+    @Target(Assert.notEqual)
     @Feed("john", "doe")
     @Feed(0, 1)
     @Feed(undefined, null)

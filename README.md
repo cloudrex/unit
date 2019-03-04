@@ -78,7 +78,7 @@ For simplicity's sake, the import statements have been ommitted.
 ```ts
 @Unit("My Unit")
 default class {
-    @Test("should determine if entities are equal")
+    @Test("Should determine if entities are equal")
     @Feed("hello", "hello")
     @Feed("world", "world")
     public shouldEqual(entity1: any, entity2: any): void {

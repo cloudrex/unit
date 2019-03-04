@@ -7,7 +7,7 @@ export default abstract class Assert {
      * Shorthand alias for Is.null.
      * @param {*} input The input value to assert.
      */
-    public null(input: any): void {
+    public static null(input: any): void {
         Assert.that(input, Is.null);
     }
 
@@ -15,7 +15,7 @@ export default abstract class Assert {
      * Shorthand alias for Is.empty.
      * @param {*} input The input value to assert.
      */
-    public empty(input: any): void {
+    public static empty(input: any): void {
         Assert.that(input, Is.empty);
     }
 
@@ -23,7 +23,7 @@ export default abstract class Assert {
      * Shorthand alias for Is.string.
      * @param {*} input The input value to assert.
      */
-    public string(input: any): void {
+    public static string(input: any): void {
         Assert.that(input, Is.string);
     }
 
@@ -31,7 +31,7 @@ export default abstract class Assert {
      * Shorthand alias for Is.object.
      * @param {*} input The input value to assert.
      */
-    public object(input: any): void {
+    public static object(input: any): void {
         Assert.that(input, Is.object);
     }
 
@@ -39,7 +39,7 @@ export default abstract class Assert {
      * Shorthand alias for Is.number.
      * @param {*} input The input value to assert.
      */
-    public number(input: any): void {
+    public static number(input: any): void {
         Assert.that(input, Is.number);
     }
 
@@ -47,7 +47,7 @@ export default abstract class Assert {
      * Shorthand alias for Is.boolean.
      * @param {*} input The input value to assert.
      */
-    public boolean(input: any): void {
+    public static boolean(input: any): void {
         Assert.that(input, Is.boolean);
     }
 

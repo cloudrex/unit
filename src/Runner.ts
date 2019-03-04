@@ -148,6 +148,7 @@ export default abstract class Runner {
 
         console.log(`${!first ? "\n" : ""}  ${name}`);
 
+        // No tests have been defined for this unit.
         if (unit.tests.length === 0) {
             const question: string = colors.yellow("?");
             const desc: string = colors.gray("No tests defined");
@@ -185,11 +186,11 @@ export default abstract class Runner {
         return invokeResult;
     }
 
-    protected static async processTest(test: ITest, isLast: boolean, prefix: boolean = false, measure: boolean = false): Promise<boolean> {
-        // TODO: Inner array may still be referenced
+    protected static async processTest(test: ITest, isLast: boolean, shouldPrefix: boolean = false, measure: boolean = false): Promise<boolean> {
+        // TODO: Inner array may still be referenced.
         let testArgs: Array<any[]> = [...test.args];
 
-        // Always run test at least once
+        // Always run test at least once.
         if (testArgs.length === 0) {
             testArgs = [[undefined]];
         }
@@ -198,7 +199,7 @@ export default abstract class Runner {
 
         let totalTime: number = 0;
 
-        // Feed all provided in-line data
+        // Feed all provided in-line data.
         for await (const args of testArgs) {
             const result: InvocationResult = await Runner.invokeTest(test.instance, args);
 
@@ -214,8 +215,28 @@ export default abstract class Runner {
         const desc: string = colors.gray(test.description);
         const check: string = colors.green("√");
         const fail: string = colors.red("X");
-        const prefixStr: string = prefix ? colors.gray("should") : "";
 
+        // Create prefix string.
+        let prefixStr: string = "";
+
+        // Append target method name if applicable.
+        const target: string | undefined = (test.instance as any).$$unit_target;
+
+        if (target !== undefined) {
+            prefixStr += colors.white(target);
+        }
+
+        // Append 'should' to the prefix if applicable.
+        if (shouldPrefix) {
+            // Append an extra space to separate target if applicable.
+            if (target !== undefined) {
+                prefixStr += " ";
+            }
+
+            prefixStr += colors.gray("Should")
+        }
+
+        // Finally, create the time string.
         let timeStr: string = measure ? colors.gray(`${totalTime}ms `) : "";
 
         if (measure) {
@@ -236,7 +257,7 @@ export default abstract class Runner {
             let counter: number = 1;
 
             for (const error of errors) {
-                console.log("     ", colors.gray(`${counter}. `) + colors.red(error.message));
+                console.log("      " + colors.gray(`${counter}. `) + colors.red(error.message));
                 counter++;
             }
 

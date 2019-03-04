@@ -28,14 +28,14 @@ export function Test(description?: string): any {
 
         DecoratorUtil.ensureFunc(method);
 
-        // Use function name if no name is provided
+        // Use function name if no name is provided.
         if (description === undefined) {
             description = method.name;
         }
 
-        // Mark function as a test
+        // Mark function as a test.
         method.$$unit_test = description;
-    }
+    };
 }
 
 /**
@@ -64,7 +64,23 @@ export function Unit(name?: string): any {
                 Runner.createTest(method.$$unit_test, name as string, method);
             }
         }
-    }
+    };
+}
+
+/**
+ * Mark a test with the specified target method's name.
+ */
+export function Target(prototype: any): any {
+    return function (target: any, prop: string) {
+        console.log(target);
+
+        if (typeof prototype !== "object" || typeof prototype.name !== "string") {
+            throw new Error("Invalid prototype specified");
+        }
+
+        // Mark function with the corresponding target.
+        target[prop].$$unit_target = prototype.name;
+    };
 }
 
 /**
