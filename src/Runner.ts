@@ -63,7 +63,6 @@ export default abstract class Runner {
 
     /**
      * Run all registered tests.
-     * @param {Partial<IRunnerOpts>} opts
      */
     public static async test(opts?: Partial<IRunnerOpts>): Promise<void> {
         const options: IRunnerOpts = {

@@ -31,7 +31,6 @@ export default class Mock {
 
     /**
      * An empty function.
-     * @return {Action}
      */
     public static get emptyFn(): Action {
         return (): void => {};
@@ -70,7 +69,6 @@ export default class Mock {
 
     /**
      * Apply the proxy to the target, permanently overriding the target function with the proxy.
-     * @return {this}
      */
     public apply(): this {
         this.target = this.proxy;
@@ -120,7 +118,6 @@ export default class Mock {
     /**
      * Mock the target's implementation once.
      * @param {MockImpl} impl The implementation.
-     * @return {this}
      */
     public once(impl: MockImpl): this {
         // Permanent implementation cannot be set at this point.
@@ -136,7 +133,6 @@ export default class Mock {
     /**
      * Permanently mock the target's implementation.
      * @param {MockImpl | undefined} impl The implementation or undefined to remove permanent implementation.
-     * @return {this}
      */
     public always(impl?: MockImpl): this {
         this.permanentImpl = impl;
@@ -146,8 +142,6 @@ export default class Mock {
 
     /**
      * Mock the target's return value once.
-     * @param {*} result
-     * @return {this}
      */
     public returnOnce(result: any): this {
         return this.once((): any => result);
@@ -155,8 +149,6 @@ export default class Mock {
 
     /**
      * Permanently mock the target's return value.
-     * @param {*} result
-     * @return {this}
      */
     public returnAlways(result: any): this {
         return this.always((): any => result);
@@ -165,7 +157,6 @@ export default class Mock {
     /**
      * Register callbacks which will be invoked after the target is invoked.
      * @param {Pipe[]} callbacks The calback(s) to register.
-     * @return {this}
      */
     public pipe(...callbacks: Pipe[]): this {
         this.pipes.push(...callbacks);
@@ -175,7 +166,6 @@ export default class Mock {
 
     /**
      * Reset implementations and restore target to it's original state.
-     * @return {this}
      */
     public get reset(): this {
         this.permanentImpl = undefined;

@@ -1,10 +1,11 @@
 import {Constraint, Action} from "./Runner";
 import {Is} from "./Is";
+import Util from "./Util";
 
 export default abstract class Assert {
     /**
      * Shorthand alias for Is.null.
-     * @param input The input value to assert.
+     * @param {*} input The input value to assert.
      */
     public null(input: any): void {
         Assert.that(input, Is.null);
@@ -12,7 +13,7 @@ export default abstract class Assert {
 
     /**
      * Shorthand alias for Is.empty.
-     * @param input The input value to assert.
+     * @param {*} input The input value to assert.
      */
     public empty(input: any): void {
         Assert.that(input, Is.empty);
@@ -20,7 +21,7 @@ export default abstract class Assert {
 
     /**
      * Shorthand alias for Is.string.
-     * @param input The input value to assert.
+     * @param {*} input The input value to assert.
      */
     public string(input: any): void {
         Assert.that(input, Is.string);
@@ -28,7 +29,7 @@ export default abstract class Assert {
 
     /**
      * Shorthand alias for Is.object.
-     * @param input The input value to assert.
+     * @param {*} input The input value to assert.
      */
     public object(input: any): void {
         Assert.that(input, Is.object);
@@ -36,7 +37,7 @@ export default abstract class Assert {
 
     /**
      * Shorthand alias for Is.number.
-     * @param input The input value to assert.
+     * @param {*} input The input value to assert.
      */
     public number(input: any): void {
         Assert.that(input, Is.number);
@@ -44,7 +45,7 @@ export default abstract class Assert {
 
     /**
      * Shorthand alias for Is.boolean.
-     * @param input The input value to assert.
+     * @param {*} input The input value to assert.
      */
     public boolean(input: any): void {
         Assert.that(input, Is.boolean);
@@ -52,8 +53,6 @@ export default abstract class Assert {
 
     /**
      * Assert that input satisfies the specified constraint(s).
-     * @param {*} input
-     * @param {Constraint[]} constraints
      */
     public static that(input: any[] | any, ...constraints: Constraint[]): void {
         for (const constraint of constraints) {
@@ -67,8 +66,6 @@ export default abstract class Assert {
 
     /**
      * Assert that two entities are equal.
-     * @param {*} entity1
-     * @param {*} entity2
      */
     public static equal(entity1: any, entity2: any): void {
         if (typeof entity1 !== typeof entity2) {
@@ -81,8 +78,6 @@ export default abstract class Assert {
 
     /**
      * Assert that two entities are not equal.
-     * @param {*} entity1
-     * @param {*} entity2
      */
     public static notEqual(entity1: any, entity2: any): void {
         if (entity1 === entity2) {
@@ -92,7 +87,6 @@ export default abstract class Assert {
 
     /**
      * Assert that input is equal to true.
-     * @param {*} input
      */
     public static true(input: any): void {
         if (input !== true) {
@@ -102,7 +96,6 @@ export default abstract class Assert {
 
     /**
      * Assert that input is equal to false.
-     * @param {*} input
      */
     public static false(input: any): void {
         if (input !== false) {
@@ -112,17 +105,11 @@ export default abstract class Assert {
 
     /**
      * Assert that the input method throws an error.
-     * @param {Action} method
-     * @param {string | undefined} message
      */
     public static throws(method: Action, message?: string): void {
         let resultError: Error | null = null;
-        let methodName: string = method.name;
 
-        // Anonymous method.
-        if (methodName === "") {
-            methodName = "anonymous";
-        }
+        const methodName: string = Util.extractMethodName(method);
 
         try {
             method();
@@ -142,17 +129,11 @@ export default abstract class Assert {
     // TODO: Simplify/merge with the 'throw()' method somehow without having to copy the entire function.
     /**
      * Assert that the input async method throws an error.
-     * @param {Action} method
-     * @param {string | undefined} message
      */
     public static async throwsAsync(method: Action, message?: string): Promise<void> {
         let resultError: Error | null = null;
-        let methodName: string = method.name;
 
-        // Anonymous method.
-        if (methodName === "") {
-            methodName = "anonymous";
-        }
+        const methodName: string = Util.extractMethodName(method);
 
         try {
             await method();
@@ -169,6 +150,9 @@ export default abstract class Assert {
         }
     }
 
+    /**
+     * Throw an error into the console output.
+     */
     protected static complain(message: string): void {
         throw new Error(message);
     }

@@ -5,8 +5,6 @@ import Mock from "./Mock";
 export abstract class Is {
     /**
      * Assert that input is greater than specified.
-     * @param {number} num
-     * @return {Constraint}
      */
     public static greaterThan(num: number): Constraint {
         return (input: any) => {
@@ -20,8 +18,6 @@ export abstract class Is {
 
     /**
      * Assert that input is a number less than specified.
-     * @param {number} num
-     * @return {Constraint}
      */
     public static lessThan(num: number): Constraint {
         return (input: any) => {
@@ -35,8 +31,6 @@ export abstract class Is {
 
     /**
      * Assert that input is greater or equal to specified.
-     * @param {number} num
-     * @return {Constraint}
      */
     public static greaterOrEqual(num: number): Constraint {
         return (input: any) => {
@@ -50,8 +44,6 @@ export abstract class Is {
 
     /**
      * Assert that input is less or equal to specified.
-     * @param {number} num
-     * @return {Constraint}
      */
     public static lessOrEqual(num: number): Constraint {
         return (input: any) => {
@@ -65,7 +57,6 @@ export abstract class Is {
 
     /**
      * Assert that input is a negative number.
-     * @return {Constraint}
      */
     public static get negative(): Constraint {
         return (input: any) => {
@@ -79,7 +70,6 @@ export abstract class Is {
 
     /**
      * Assert that input is a positive number.
-     * @return {Constraint}
      */
     public static get positive(): Constraint {
         return (input: any) => {
@@ -93,7 +83,6 @@ export abstract class Is {
 
     /**
      * Assert that input is the number zero.
-     * @return {Constraint}
      */
     public static get neutral(): Constraint {
         return (input: any) => {
@@ -107,7 +96,6 @@ export abstract class Is {
 
     /**
      * Assert that input is null.
-     * @return {Constraint}
      */
     public static get null(): Constraint {
         return (input: any) => {
@@ -121,9 +109,6 @@ export abstract class Is {
 
     /**
      * Assert that input is a number that falls within specified range.
-     * @param {number} from
-     * @param {number} to
-     * @return {Constraint}
      */
     public static inRange(from: number, to: number): Constraint {
         return (input: any) => {
@@ -140,7 +125,6 @@ export abstract class Is {
 
     /**
      * Assert that input is empty, has no value(s) or not defined.
-     * @return {Constraint}
      */
     public static get empty(): Constraint {
         return (input: any) => {
@@ -154,7 +138,6 @@ export abstract class Is {
 
     /**
      * Assert that input is an empty string.
-     * @return {Constraint}
      */
     public static get emptyString(): Constraint {
         return (input: any) => {
@@ -168,7 +151,6 @@ export abstract class Is {
 
     /**
      * Assert that input is an empty array.
-     * @return {Constraint}
      */
     public static get emptyArray(): Constraint {
         return (input: any) => {
@@ -182,8 +164,6 @@ export abstract class Is {
 
     /**
      * Assert that input is of the specified type.
-     * @param {JsType} type
-     * @return {Constraint}
      */
     public static type(type: JsType): Constraint {
         return (input: any) => {
@@ -204,7 +184,6 @@ export abstract class Is {
 
     /**
      * Assert that input is NaN (not a number).
-     * @return {Constraint}
      */
     public static get NaN(): Constraint {
         return (input: any) => {
@@ -218,7 +197,6 @@ export abstract class Is {
 
     /**
      * Assert that input is an odd number.
-     * @return {Constraint}
      */
     public static get odd(): Constraint {
         return (input: any) => {
@@ -232,7 +210,6 @@ export abstract class Is {
 
     /**
      * Assert that input is an even number.
-     * @return {Constraint}
      */
     public static get even(): Constraint {
         return (input: any) => {
@@ -246,8 +223,6 @@ export abstract class Is {
 
     /**
      * Assert that input is an instance of the specified class.
-     * @param {*} parent
-     * @return {Constraint}
      */
     public static instanceOf(parent: any): Constraint {
         return (input: any) => {
@@ -261,7 +236,6 @@ export abstract class Is {
 
     /**
      * Assert that input is an array.
-     * @return {Constraint}
      */
     public static get array(): Constraint {
         return (input: any) => {
@@ -276,7 +250,6 @@ export abstract class Is {
     /**
      * Assert that input is an array with the specified length.
      * @param {number} length The amount of elements array must contain.
-     * @return {Constraint}
      */
     public static arrayWithLength(length: number): Constraint {
         return (input: any) => {
@@ -290,8 +263,6 @@ export abstract class Is {
 
     /**
      * Assert that input is an array of a specific type.
-     * @param {JsType} type
-     * @return {Constraint}
      */
     public static arrayOf(type: JsType): Constraint {
         return (input: any) => {
@@ -317,7 +288,6 @@ export abstract class Is {
 
     /**
      * Asserts that a mock function was invoked.
-     * @return {Constraint}
      */
     public static get called(): Constraint {
         return (input: any) => {
@@ -331,7 +301,6 @@ export abstract class Is {
 
     /**
      * Assert that input is a string.
-     * @return {Constraint}
      */
     public static get string(): Constraint {
         return Is.type(JsType.String);
@@ -339,7 +308,6 @@ export abstract class Is {
 
     /**
      * Assert that input is an object.
-     * @return {Constraint}
      */
     public static get object(): Constraint {
         return Is.type(JsType.Object);
@@ -347,7 +315,6 @@ export abstract class Is {
 
     /**
      * Assert that input is a boolean.
-     * @return {Constraint}
      */
     public static get boolean(): Constraint {
         return Is.type(JsType.Boolean);
@@ -355,7 +322,6 @@ export abstract class Is {
 
     /**
      * Assert that input is a big integer.
-     * @return {Constraint}
      */
     public static get bigInt(): Constraint {
         return Is.type(JsType.BigInteger);
@@ -363,7 +329,6 @@ export abstract class Is {
 
     /**
      * Assert that input is undefined.
-     * @return {Constraint}
      */
     public static get undefined(): Constraint {
         return Is.type(JsType.Undefined);
@@ -371,7 +336,6 @@ export abstract class Is {
 
     /**
      * Assert that input is neither undefined, null, or NaN.
-     * @return {Constraint}
      */
     public static get defined(): Constraint {
         return (input: any) => {
@@ -385,7 +349,6 @@ export abstract class Is {
 
     /**
      * Assert that input is a symbol.
-     * @return {Constraint}
      */
     public static get symbol(): Constraint {
         return Is.type(JsType.Symbol);
@@ -393,7 +356,6 @@ export abstract class Is {
 
     /**
      * Assert that input is a function.
-     * @return {Constraint}
      */
     public static get function(): Constraint {
         return Is.type(JsType.Function);
@@ -401,7 +363,6 @@ export abstract class Is {
 
     /**
      * Assert that input is a number.
-     * @return {Constraint}
      */
     public static get number(): Constraint {
         return Is.type(JsType.Number);
