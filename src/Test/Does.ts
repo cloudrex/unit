@@ -1,0 +1,50 @@
+import {test, unit, feed} from "../Decorators";
+import Does from "../Does";
+import Assert from "../Assert";
+
+@unit("Does")
+default class {
+    @test("should assert whether ends with")
+    @feed("john doe", "doe")
+    @feed("john doe", "john doe")
+    @feed("doe", "e")
+    public endWith(input: string, expected: string): void {
+        Assert.that(input, Does.endWith(expected));
+    }
+
+    @test("should assert whether starts with")
+    @feed("john doe", "john")
+    @feed("john doe", "john doe")
+    @feed("doe", "d")
+    public startWith(input: string, expected: string): void {
+        Assert.that(input, Does.startWith(expected));
+    }
+
+    @test("should assert whether matches pattern")
+    @feed("john doe", /^john/)
+    @feed("john doe", /doe$/)
+    public match(input: string, pattern: RegExp): void {
+        Assert.that(input, Does.match(pattern));
+    }
+
+    @test("should assert whether has property")
+    @feed({
+        name: "john"
+    }, "name")
+    @feed({
+        name: "doe",
+        age: 21
+    }, "age")
+    @feed([], "length")
+    public haveProperty(obj: object, name: string): void {
+        Assert.that(obj, Does.haveProperty(name));
+    }
+
+    @test("should assert whether has length")
+    @feed([], 0)
+    @feed(["john"], 1)
+    @feed(["john", "doe"], 2)
+    public haveLength(arr: any[], length: number): void {
+        Assert.that(arr, Does.haveLength(length));
+    }
+}
