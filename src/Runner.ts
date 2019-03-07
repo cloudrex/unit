@@ -223,7 +223,7 @@ export default abstract class Runner {
         const target: string | undefined = (test.instance as any).$$unit_target;
 
         if (target !== undefined) {
-            prefixStr += colors.white(target + "()");
+            prefixStr += colors.bold.gray(target + "()");
         }
 
         // Append 'should' to the prefix if applicable.
