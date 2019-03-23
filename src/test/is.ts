@@ -1,7 +1,7 @@
-import {Test, Unit, Feed, Target} from "../Decorators";
-import Assert from "../Assert";
-import {Is} from "../Is";
-import {JsType} from "../Runner";
+import {Test, Unit, Feed, Target} from "../decorators";
+import Assert from "../assert";
+import {Is} from "../is";
+import {JsType} from "../runner";
 
 @Unit("Is")
 default class {

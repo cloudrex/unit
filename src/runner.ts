@@ -1,7 +1,7 @@
 import colors from "colors";
-import Util from "./Util";
-import {IRunnerOpts, DefaultOpts} from "./Options";
-import Stopwatch from "./Stopwatch";
+import Util from "./util";
+import {IRunnerOpts, DefaultOpts} from "./options";
+import Stopwatch from "./stopwatch";
 
 /**
  * Representation of a single test.

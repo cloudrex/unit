@@ -1,4 +1,4 @@
-import {Action} from "./Runner";
+import {Action} from "./runner";
 
 /**
  * Represents a mock function implementation.

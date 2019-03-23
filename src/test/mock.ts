@@ -1,7 +1,7 @@
-import {Test, Unit, Target} from "../Decorators";
-import Mock from "../Mock";
-import Assert from "../Assert";
-import {Is} from "../Is";
+import {Test, Unit, Target} from "../decorators";
+import Mock from "../mock";
+import Assert from "../assert";
+import {Is} from "../is";
 
 const emptyFn = (): void => {};
 

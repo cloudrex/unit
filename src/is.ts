@@ -1,6 +1,6 @@
-import {Constraint, JsType} from "./Runner";
-import Util from "./Util";
-import Mock from "./Mock";
+import {Constraint, JsType} from "./runner";
+import Util from "./util";
+import Mock from "./mock";
 
 export abstract class Is {
     /**

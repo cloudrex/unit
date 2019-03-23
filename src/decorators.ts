@@ -1,4 +1,4 @@
-import Runner from "./Runner";
+import Runner from "./runner";
 
 /**
  * Feed in-line data to a test. Must be attached to a method.

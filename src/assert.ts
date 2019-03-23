@@ -1,6 +1,6 @@
-import {Constraint, Action} from "./Runner";
-import {Is} from "./Is";
-import Util from "./Util";
+import {Constraint, Action} from "./runner";
+import {Is} from "./is";
+import Util from "./util";
 
 export default abstract class Assert {
     /**

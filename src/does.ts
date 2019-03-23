@@ -1,4 +1,4 @@
-import {Constraint} from "./Runner";
+import {Constraint} from "./runner";
 
 export default abstract class Does {
     /**

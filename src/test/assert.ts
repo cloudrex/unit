@@ -1,5 +1,5 @@
-import {Test, Unit, Feed, Target} from "../Decorators";
-import Assert from "../Assert";
+import {Test, Unit, Feed, Target} from "../decorators";
+import Assert from "../assert";
 
 @Unit("Assert")
 default class {
