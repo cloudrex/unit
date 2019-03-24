@@ -4,7 +4,7 @@
     "description": "The JavaScript unit testing framework for perfectionists",
     "main": "dist/Index.js",
     "scripts": {
-        "test": "npm run build && node dist/Test/Runner.js",
+        "test": "npm run build && node dist/test/runner.js",
         "build": "tsc",
         "prepublishOnly": "npm test"
     },
