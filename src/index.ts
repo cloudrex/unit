@@ -1,7 +1,7 @@
 import {Is} from "./is";
 import Assert from "./assert";
 import Runner, {Constraint, JsType} from "./runner";
-import {Unit, Test, Feed, Target} from "./decorators";
+import {unit, test, feed, target} from "./decorators";
 import Does from "./does";
 import Mock from "./mock";
 import Stopwatch from "./stopwatch";
@@ -12,14 +12,14 @@ export {
     Is,
     Constraint,
     JsType,
-    Unit,
-    Test,
+    unit,
+    test,
     Runner,
-    Feed,
+    feed,
     Does,
     Mock,
     Stopwatch,
     DataSet,
     OmitConflictingType,
-    Target
+    target
 };

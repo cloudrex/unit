@@ -1,20 +1,20 @@
-import {Test, Unit, Target} from "../decorators";
+import {test, unit, target} from "../decorators";
 import Mock from "../mock";
 import Assert from "../assert";
 import {Is} from "../is";
 
 const emptyFn = (): void => {};
 
-@Unit("Mock")
+@unit("Mock")
 default class {
-    @Test("Should return a mock instance upon statically creating mock")
-    @Target(Mock.fn)
+    @test("Should return a mock instance upon statically creating mock")
+    @target(Mock.fn)
     public mockFn(): void {
         Assert.that(Mock.fn(emptyFn), Is.instanceOf(Mock));
     }
 
-    @Test("Should register a single mock implementation")
-    @Target(Mock.prototype.once)
+    @test("Should register a single mock implementation")
+    @target(Mock.prototype.once)
     public once(): void {
         const mock: Mock = Mock.fn(emptyFn);
 
@@ -27,8 +27,8 @@ default class {
         Assert.that(mock["singleMockStack"], Is.arrayWithLength(1));
     }
 
-    @Test("Should assign the permanent implementation")
-    @Target(Mock.prototype.always)
+    @test("Should assign the permanent implementation")
+    @target(Mock.prototype.always)
     public always(): void {
         const mock: Mock = Mock.fn(emptyFn);
 
@@ -41,8 +41,8 @@ default class {
         Assert.that(mock["permanentImpl"], Is.function);
     }
 
-    @Test("Should be able to remove permanent implementation")
-    @Target(Mock.prototype.always)
+    @test("Should be able to remove permanent implementation")
+    @target(Mock.prototype.always)
     public alwaysRemove(): void {
         const mock: Mock = Mock.fn(emptyFn)
             .always((): void => {})
@@ -51,8 +51,8 @@ default class {
         Assert.that(mock["permanentImpl"], Is.undefined);
     }
 
-    @Test("Should invoke a mocked function")
-    @Target(Mock.fn)
+    @test("Should invoke a mocked function")
+    @target(Mock.fn)
     public invoke(): void {
         let fn = (): number => 0;
 
@@ -62,8 +62,8 @@ default class {
         Assert.equal(fn(), 0);
     }
 
-    @Test("Should mock a function once with various implementations")
-    @Target(Mock.prototype.once)
+    @test("Should mock a function once with various implementations")
+    @target(Mock.prototype.once)
     public onceMultiple(): void {
         let fn = (): number => 1;
 
@@ -77,8 +77,8 @@ default class {
         Assert.equal(fn(), 1);
     }
 
-    @Test("Should mock a function result once")
-    @Target(Mock.prototype.returnOnce)
+    @test("Should mock a function result once")
+    @target(Mock.prototype.returnOnce)
     public onceResult(): void {
         let fn = (): number => 1;
 

@@ -1,54 +1,54 @@
-import {Test, Unit, Feed, Target} from "../decorators";
+import {test, unit, feed, target} from "../decorators";
 import Does from "../does";
 import Assert from "../assert";
 
-@Unit("Does")
+@unit("Does")
 default class {
-    @Test("Should assert whether ends with")
-    @Target(Does.endWith)
-    @Feed("john doe", "doe")
-    @Feed("john doe", "john doe")
-    @Feed("doe", "e")
+    @test("Should assert whether ends with")
+    @target(Does.endWith)
+    @feed("john doe", "doe")
+    @feed("john doe", "john doe")
+    @feed("doe", "e")
     public endWith(input: string, expected: string): void {
         Assert.that(input, Does.endWith(expected));
     }
 
-    @Test("Should assert whether starts with")
-    @Target(Does.startWith)
-    @Feed("john doe", "john")
-    @Feed("john doe", "john doe")
-    @Feed("doe", "d")
+    @test("Should assert whether starts with")
+    @target(Does.startWith)
+    @feed("john doe", "john")
+    @feed("john doe", "john doe")
+    @feed("doe", "d")
     public startWith(input: string, expected: string): void {
         Assert.that(input, Does.startWith(expected));
     }
 
-    @Test("Should assert whether matches pattern")
-    @Target(Does.match)
-    @Feed("john doe", /^john/)
-    @Feed("john doe", /doe$/)
+    @test("Should assert whether matches pattern")
+    @target(Does.match)
+    @feed("john doe", /^john/)
+    @feed("john doe", /doe$/)
     public match(input: string, pattern: RegExp): void {
         Assert.that(input, Does.match(pattern));
     }
 
-    @Test("Should assert whether has property")
-    @Target(Does.haveProperty)
-    @Feed({
+    @test("Should assert whether has property")
+    @target(Does.haveProperty)
+    @feed({
         name: "john"
     }, "name")
-    @Feed({
+    @feed({
         name: "doe",
         age: 21
     }, "age")
-    @Feed([], "length")
+    @feed([], "length")
     public haveProperty(obj: object, name: string): void {
         Assert.that(obj, Does.haveProperty(name));
     }
 
-    @Test("Should assert whether has length")
-    @Target(Does.haveLength)
-    @Feed([], 0)
-    @Feed(["john"], 1)
-    @Feed(["john", "doe"], 2)
+    @test("Should assert whether has length")
+    @target(Does.haveLength)
+    @feed([], 0)
+    @feed(["john"], 1)
+    @feed(["john", "doe"], 2)
     public haveLength(arr: any[], length: number): void {
         Assert.that(arr, Does.haveLength(length));
     }

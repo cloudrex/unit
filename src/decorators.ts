@@ -4,7 +4,7 @@ import Runner from "./runner";
  * Feed in-line data to a test. Must be attached to a method.
  * @param {Array<*>} args The array of arguments that the test will receive.
  */
-export function Feed(...args: any[]): any {
+export function feed(...args: any[]): any {
     return function (target: any, prop: any) {
         const method: any = target[prop];
 
@@ -22,7 +22,7 @@ export function Feed(...args: any[]): any {
  * Define a test. Must be attached to a class method.
  * @param {string | undefined} description The description to display after the test is executed.
  */
-export function Test(description?: string): any {
+export function test(description?: string): any {
     return function (target: any, prop: any) {
         const method: any = target[prop];
 
@@ -42,7 +42,7 @@ export function Test(description?: string): any {
  * Define a test unit. Must be attached to a class.
  * @param {string | undefined} name The name of the unit. Will default to the class's name if not provided.
  */
-export function Unit(name?: string): any {
+export function unit(name?: string): any {
     return function (target: any) {
         // TODO: Required?
         // DecoratorUtils.ensureObj(target);
@@ -70,7 +70,7 @@ export function Unit(name?: string): any {
 /**
  * Mark a test with the specified target method's name.
  */
-export function Target(instance: any): any {
+export function target(instance: any): any {
     return function (target: any, prop: string) {
         if (typeof instance !== "function" || typeof instance.name !== "string") {
             throw new Error("Invalid prototype specified");
