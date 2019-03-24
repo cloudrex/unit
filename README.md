@@ -36,7 +36,7 @@ default class { // Anonymous class declaration
 
 4. Import all units and run tests from a single file
 
-5. Use `@Feed` to provide in-line data whenever possible
+5. Use `@feed` to provide in-line data whenever possible
 
 6. Do not export unit classes (There's no need!)
 
@@ -71,7 +71,7 @@ Our output should be:
 
 #### 2. Feeding tests with in-line data
 
-Instead of writing many assert statements, we can use the clever `@Feed` decorator. It's job is to provide (thus "feed") the test method with in-line data.
+Instead of writing many assert statements, we can use the clever `@feed` decorator. It's job is to provide (thus "feed") the test method with in-line data.
 
 For simplicity's sake, the import statements have been ommitted.
 
@@ -79,8 +79,8 @@ For simplicity's sake, the import statements have been ommitted.
 @unit("My Unit")
 default class {
     @test("should determine if entities are equal")
-    @Feed("hello", "hello")
-    @Feed("world", "world")
+    @feed("hello", "hello")
+    @feed("world", "world")
     public shouldEqual(entity1: any, entity2: any): void {
         Assert.equals(entity1, entity2);
     }
