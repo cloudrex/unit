@@ -233,7 +233,7 @@ export default abstract class Runner {
                 prefixStr += " ";
             }
 
-            prefixStr += colors.gray("Should")
+            prefixStr += colors.gray("should")
         }
 
         // Append an extra space to separate from 'desc' if applicable.

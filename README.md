@@ -26,7 +26,7 @@ Below are some suggested practices to follow when using Unit for unit testing.
 2. Use anonymous classes for the units:
 
 ```ts
-@Unit("My Unit")
+@unit("My Unit")
 default class { // Anonymous class declaration
     //
 }
@@ -48,9 +48,9 @@ Let's create a simple test to determine whether 'test' equals 'test'. For this, 
 ```ts
 import {Unit, Test, Assert, Runner} from "unit";
 
-@Unit("My Unit")
+@unit("My Unit")
 default class {
-    @Test("'test' should equal 'test'")
+    @test("'test' should equal 'test'")
     public shouldEqual(): void {
         Assert.equals("test", "test");
     }
@@ -76,9 +76,9 @@ Instead of writing many assert statements, we can use the clever `@Feed` decorat
 For simplicity's sake, the import statements have been ommitted.
 
 ```ts
-@Unit("My Unit")
+@unit("My Unit")
 default class {
-    @Test("Should determine if entities are equal")
+    @test("should determine if entities are equal")
     @Feed("hello", "hello")
     @Feed("world", "world")
     public shouldEqual(entity1: any, entity2: any): void {

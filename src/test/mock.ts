@@ -7,13 +7,13 @@ const emptyFn = (): void => {};
 
 @unit("Mock")
 default class {
-    @test("Should return a mock instance upon statically creating mock")
+    @test("should return a mock instance upon statically creating mock")
     @target(Mock.fn)
     public mockFn(): void {
         Assert.that(Mock.fn(emptyFn), Is.instanceOf(Mock));
     }
 
-    @test("Should register a single mock implementation")
+    @test("should register a single mock implementation")
     @target(Mock.prototype.once)
     public once(): void {
         const mock: Mock = Mock.fn(emptyFn);
@@ -27,7 +27,7 @@ default class {
         Assert.that(mock["singleMockStack"], Is.arrayWithLength(1));
     }
 
-    @test("Should assign the permanent implementation")
+    @test("should assign the permanent implementation")
     @target(Mock.prototype.always)
     public always(): void {
         const mock: Mock = Mock.fn(emptyFn);
@@ -41,7 +41,7 @@ default class {
         Assert.that(mock["permanentImpl"], Is.function);
     }
 
-    @test("Should be able to remove permanent implementation")
+    @test("should be able to remove permanent implementation")
     @target(Mock.prototype.always)
     public alwaysRemove(): void {
         const mock: Mock = Mock.fn(emptyFn)
@@ -51,7 +51,7 @@ default class {
         Assert.that(mock["permanentImpl"], Is.undefined);
     }
 
-    @test("Should invoke a mocked function")
+    @test("should invoke a mocked function")
     @target(Mock.fn)
     public invoke(): void {
         let fn = (): number => 0;
@@ -62,7 +62,7 @@ default class {
         Assert.equal(fn(), 0);
     }
 
-    @test("Should mock a function once with various implementations")
+    @test("should mock a function once with various implementations")
     @target(Mock.prototype.once)
     public onceMultiple(): void {
         let fn = (): number => 1;
@@ -77,7 +77,7 @@ default class {
         Assert.equal(fn(), 1);
     }
 
-    @test("Should mock a function result once")
+    @test("should mock a function result once")
     @target(Mock.prototype.returnOnce)
     public onceResult(): void {
         let fn = (): number => 1;

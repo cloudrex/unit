@@ -3,7 +3,7 @@ import Assert from "../assert";
 
 @unit("Assert")
 default class {
-    @test("Should assert")
+    @test("should assert")
     @target(Assert.that)
     public that(): void {
         Assert.that(null, () => {
@@ -11,7 +11,7 @@ default class {
         });
     }
 
-    @test("Should assert whether throws")
+    @test("should assert whether throws")
     @target(Assert.throws)
     public throws(): void {
         Assert.throws(() => {
@@ -19,7 +19,7 @@ default class {
         });
     }
 
-    @test("Should whether throws with message")
+    @test("should whether throws with message")
     @target(Assert.throws)
     public throwsWithMessage(): void {
         Assert.throws(() => {
@@ -27,19 +27,19 @@ default class {
         }, "test");
     }
 
-    @test("Should assert whether true")
+    @test("should assert whether true")
     @target(Assert.true)
     public true(): void {
         Assert.true(true);
     }
 
-    @test("Should assert whether false")
+    @test("should assert whether false")
     @target(Assert.false)
     public false(): void {
         Assert.false(false);
     }
 
-    @test("Should assert whether equal")
+    @test("should assert whether equal")
     @target(Assert.equal)
     @feed("test", "test")
     @feed(1, 1)
@@ -51,7 +51,7 @@ default class {
         Assert.equal(entity1, entity2);
     }
 
-    @test("Should assert whether not equal")
+    @test("should assert whether not equal")
     @target(Assert.notEqual)
     @feed("john", "doe")
     @feed(0, 1)
