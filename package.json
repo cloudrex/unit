@@ -2,7 +2,7 @@
     "name": "unit",
     "version": "1.4.2-0",
     "description": "The JavaScript unit testing framework for perfectionists",
-    "main": "dist/Index.js",
+    "main": "dist/index.js",
     "scripts": {
         "test": "npm run build && node dist/test/runner.js",
         "build": "tsc",
