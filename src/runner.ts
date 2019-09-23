@@ -8,7 +8,9 @@ import Stopwatch from "./stopwatch";
  */
 export interface ITest {
     readonly description: string;
+
     readonly instance: (...args: any[]) => void;
+
     readonly args: Array<any[]>;
 }
 
@@ -17,12 +19,15 @@ export interface ITest {
  */
 export interface IUnit<T = any> {
     readonly name: string;
+
     readonly instance: T;
+
     readonly tests: ITest[];
 }
 
 interface InvocationResult {
     error?: Error;
+
     time: number;
 }
 
@@ -31,12 +36,19 @@ interface InvocationResult {
  */
 export enum JsType {
     Object = "object",
+
     Function = "function",
+
     String = "string",
+
     Number = "number",
+
     Undefined = "undefined",
+
     BigInteger = "bigint",
+
     Symbol = "symbol",
+    
     Boolean = "boolean"
 }
 

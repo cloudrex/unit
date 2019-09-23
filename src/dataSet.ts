@@ -1,7 +1,10 @@
 export enum OmitConflictingType {
     Object,
+
     Array,
+
     Method,
+
     Number
 }
 
