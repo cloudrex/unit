@@ -17,8 +17,8 @@ const ComplexTypes: string[] = [
 export default abstract class DataSet {
     /**
      * Generate a conflicting data set composed of all basic JavaScript data types.
-     * @param exclude The types to omit from generation result.
-     * @param complexity The amount of parameters the target function takes. This will generate all possible combinations.
+     * @param {Array<*>} exclude The types to omit from generation result.
+     * @param {number} [complexity=1] The amount of parameters the target function takes. This will generate all possible combinations.
      */
     public static generateConflicting(exclude?: any[], complexity: number = 1): any[] {
         const params: any[] = [

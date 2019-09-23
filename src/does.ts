@@ -3,8 +3,6 @@ import {Constraint} from "./runner";
 export default abstract class Does {
     /**
      * Assert that input is a string starting with the specified string.
-     * @param str
-     * @return {Constraint}
      */
     public static startWith(str: string): Constraint {
         return (input: any) => {
@@ -18,8 +16,6 @@ export default abstract class Does {
 
     /**
      * Assert that input is a string ending with the specified string.
-     * @param {string} str
-     * @return {Constraint}
      */
     public static endWith(str: string): Constraint {
         return (input: any) => {
@@ -34,7 +30,6 @@ export default abstract class Does {
     /**
      * Assert that input matches specified patterns.
      * @param {RegExp[]} patterns The patterns to match.
-     * @return {Constraint}
      */
     public static match(...patterns: RegExp[]): Constraint {
         return (input: any) => {
@@ -61,7 +56,6 @@ export default abstract class Does {
     /**
      * Assert that input is an array containing the specified item.
      * @param {*} item The item to verify the existance of.
-     * @return {Constraint}
      */
     public static include(item: any): Constraint {
         return (input: any) => {
@@ -90,7 +84,6 @@ export default abstract class Does {
     /**
      * Assert that input has the specified length property value.
      * @param {number} length The length to assert.
-     * @return {Constraint}
      */
     public static haveLength(length: number): Constraint {
         return (input: any) => {
@@ -105,7 +98,6 @@ export default abstract class Does {
     /**
      * Assert that input has the specified size property value.
      * @param {number} length The size to assert.
-     * @return {Constraint}
      */
     public static haveSize(size: number): Constraint {
         return (input: any) => {

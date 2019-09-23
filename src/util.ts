@@ -1,8 +1,6 @@
 export default abstract class Util {
     /**
-     * Determine whether the input is empty or missing value
-     * @param {*} input
-     * @return {boolean}
+     * Determine whether the input is empty or missing value.
      */
     public static isEmpty(input: any): boolean {
         return input === undefined
@@ -28,7 +26,17 @@ export default abstract class Util {
         return Math.round(amount / max * 100);
     }
 
+    /**
+     * Determine whether a number is even.
+     */
     public static isEven(num: number): boolean {
         return Math.abs(num) % 2 === 0;
+    }
+
+    /**
+     * Extract the name of a method. Returns 'anonymous' if method has no name.
+     */
+    public static extractMethodName(method: any): string {
+        return method.name || "anonymous";
     }
 }

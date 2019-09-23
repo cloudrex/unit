@@ -26,7 +26,7 @@ Below are some suggested practices to follow when using Unit for unit testing.
 2. Use anonymous classes for the units:
 
 ```ts
-@Unit("My Unit")
+@unit("My Unit")
 default class { // Anonymous class declaration
     //
 }
@@ -36,7 +36,7 @@ default class { // Anonymous class declaration
 
 4. Import all units and run tests from a single file
 
-5. Use `@Feed` to provide in-line data whenever possible
+5. Use `@feed` to provide in-line data whenever possible
 
 6. Do not export unit classes (There's no need!)
 
@@ -48,9 +48,9 @@ Let's create a simple test to determine whether 'test' equals 'test'. For this, 
 ```ts
 import {Unit, Test, Assert, Runner} from "unit";
 
-@Unit("My Unit")
+@unit("My Unit")
 default class {
-    @Test("'test' should equal 'test'")
+    @test("'test' should equal 'test'")
     public shouldEqual(): void {
         Assert.equals("test", "test");
     }
@@ -71,16 +71,16 @@ Our output should be:
 
 #### 2. Feeding tests with in-line data
 
-Instead of writing many assert statements, we can use the clever `@Feed` decorator. It's job is to provide (thus "feed") the test method with in-line data.
+Instead of writing many assert statements, we can use the clever `@feed` decorator. It's job is to provide (thus "feed") the test method with in-line data.
 
 For simplicity's sake, the import statements have been ommitted.
 
 ```ts
-@Unit("My Unit")
+@unit("My Unit")
 default class {
-    @Test("should determine if entities are equal")
-    @Feed("hello", "hello")
-    @Feed("world", "world")
+    @test("should determine if entities are equal")
+    @feed("hello", "hello")
+    @feed("world", "world")
     public shouldEqual(entity1: any, entity2: any): void {
         Assert.equals(entity1, entity2);
     }
