@@ -5,7 +5,7 @@ import {unit, test, feed} from "./decorators";
 import Does from "./does";
 import Mock from "./mock";
 import Stopwatch from "./stopwatch";
-import DataSet, {OmitConflictingType} from "./data-set";
+import DataSet, {OmitConflictingType} from "./dataSet";
 
 export {
     Assert,
