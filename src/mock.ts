@@ -15,7 +15,9 @@ export type Pipe = (call: ICall) => void;
  */
 export interface ICall {
     readonly time: number;
+
     readonly args: any[];
+
     readonly result: any;
 }
 
@@ -42,10 +44,13 @@ export default class Mock {
     public readonly calls: ICall[];
 
     protected readonly singleMockStack: MockImpl[];
+
     protected readonly pipes: Pipe[];
+
     protected readonly original: any;
 
     protected target: any;
+
     protected permanentImpl?: MockImpl;
 
     /**

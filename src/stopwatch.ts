@@ -1,9 +1,17 @@
 import {performance} from "perf_hooks";
 
 export default class Stopwatch {
-    protected startTime: number = -1;
-    protected endTime: number = -1;
-    protected lastStepTime: number = -1;
+    public startTime: number = -1;
+
+    public endTime: number = -1;
+
+    public lastStepTime: number = -1;
+
+    public constructor() {
+        this.startTime = -1;
+        this.endTime = -1;
+        this.lastStepTime = -1;
+    }
 
     /**
      * Start the this.
